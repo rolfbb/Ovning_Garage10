@@ -10,6 +10,8 @@ namespace Ovning_Garage10
     {
         static void Main(string[] args)
         {
+            GarageHandler garage = new GarageHandler();
+            garage.Run();
         }
     }
 }
