@@ -17,12 +17,15 @@ namespace Ovning_Garage10.Entities
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            foreach (var item in vehicles)
+            {
+                yield return item;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return GetEnumerator();
         }
     }
 }

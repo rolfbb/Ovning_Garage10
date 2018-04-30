@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Garage.cs" />
+    <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="GarageHandler.cs" />
     <Compile Include="MenuHandler.cs" />
     <Compile Include="Program.cs" />
@@ -51,8 +53,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

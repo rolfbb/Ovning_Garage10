@@ -6,6 +6,8 @@ namespace Ovning_Garage10
 {
     internal class GarageHandler
     {
+        private Garage<Vehicle> garage;
+
         internal void Run()
         {
             bool run = true;
@@ -31,7 +33,7 @@ namespace Ovning_Garage10
         private void CreateNewGarage()
         {
             int nbrOfParkingLots = UI.AskForInt("Hur många parkeringslatser ska det vara i det nya garaget?");
-            Garage<Vehicle> garage = new Garage<Vehicle>(nbrOfParkingLots);
+            garage = new Garage<Vehicle>(nbrOfParkingLots);
 
         }
 
