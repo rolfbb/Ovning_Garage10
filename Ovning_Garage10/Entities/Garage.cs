@@ -19,7 +19,7 @@ namespace Ovning_Garage10.Entities
         {
             foreach (var item in vehicles)
             {
-                yield return item;
+                yield return (T) item;
             }
         }
 
