@@ -22,21 +22,43 @@ namespace Ovning_Garage10
 
         }
 
-        private static void InitCommands()
+        internal static Dictionary<string, MenyCommand> InitCommands()
         {
-            if (mainMenuCommands == null)
-            {
-                mainMenuCommands = new Dictionary<string, string>();
-                mainMenuCommands.Add("F", "Listar samtliga parkerade fordon");
-                mainMenuCommands.Add("T", "Listar fordonstyper och hur många av varje som står i garaget");
-                mainMenuCommands.Add("L", "Lägg till fordon");
-                mainMenuCommands.Add("R", "Ta bort fordon");
-                mainMenuCommands.Add("S", "Sök fordon via registreringsnumret");
-                mainMenuCommands.Add("C", "Skapa nytt garage");
-                mainMenuCommands.Add("G", "Antal lediga parkeringsplatser");
-                mainMenuCommands.Add("M", "Huvudmeny");
-                mainMenuCommands.Add("Q", "Du har valt att avsluta programmet");
-            }
+            //if (mainMenuCommands == null)
+            //{
+            //    //mainMenuCommands = new Dictionary<string, string>();
+            //    //mainMenuCommands.Add("F", "Listar samtliga parkerade fordon");
+            //    //mainMenuCommands.Add("T", "Listar fordonstyper och hur många av varje som står i garaget");
+            //    //mainMenuCommands.Add("L", "Lägg till fordon");
+            //    //mainMenuCommands.Add("R", "Ta bort fordon");
+            //    //mainMenuCommands.Add("S", "Sök fordon via registreringsnumret");
+            //    //mainMenuCommands.Add("C", "Skapa nytt garage");
+            //    //mainMenuCommands.Add("G", "Antal lediga parkeringsplatser");
+            //    //mainMenuCommands.Add("M", "Huvudmeny");
+            //    //mainMenuCommands.Add("Q", "Du har valt att avsluta programmet");
+
+            //    //Dictionary<string, MenyCommand> mainMenuCommands = new Dictionary<string, MenyCommand>();
+            //    //mainMenuCommands.Add("F", new MenyCommand { Description = "Listar samtliga parkerade fordon", Method = () => ListAllVehicles() });
+            //    //mainMenuCommands.Add("T", new MenyCommand { Description = "Listar fordonstyper och hur många av varje som står i garaget", Method = () => ListVehicleTypes() });
+            //    //mainMenuCommands.Add("L", new MenyCommand { Description = "Lägg till fordon", Method = () => AddVehicle() });
+            //    //mainMenuCommands.Add("R", new MenyCommand { Description = "Ta bort fordon", Method = () => RemoveVehicle() });
+            //    //mainMenuCommands.Add("S", new MenyCommand { Description = "Sök fordon via registreringsnumret", Method = () => SearchVehicleByRegNo() });
+            //    //mainMenuCommands.Add("C", new MenyCommand { Description = "Skapa nytt garage", Method = () => CreateNewGarage() });
+            //    //mainMenuCommands.Add("G", new MenyCommand { Description = "Antal lediga parkeringsplatser", Method = () => GetNbrOfFreeSpots() });
+            //    //mainMenuCommands.Add("M", new MenyCommand { Description = "Huvudmeny", Method = () => MenuHandler.PrintMainMenu() });
+            //    //mainMenuCommands.Add("Q", new MenyCommand { Description = "Du har valt att avsluta programmet", Method = () => run = false;
+            //}
+            Dictionary<string, MenyCommand> mainMenuCommands = new Dictionary<string, MenyCommand>();
+
+            return mainMenuCommands;
+
+            //Console.WriteLine(mainMenuCommands["F"].Description);
+            //mainMenuCommands["F"].Method();
+        }
+
+        public static void Print()
+        {
+            Console.WriteLine("Hej, hej!");
         }
 
         internal static void PrintMainMenuCommandForKey(ConsoleKey key, bool print)

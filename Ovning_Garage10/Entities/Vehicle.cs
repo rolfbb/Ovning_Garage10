@@ -13,7 +13,7 @@ namespace Ovning_Garage10.Entities
             this.type = type;
         }
 
-        internal string ToString()
+        public override string ToString()
         {
             return type; //TODO: Make something meaningfull here...
         }

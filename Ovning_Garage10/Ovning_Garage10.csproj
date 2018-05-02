@@ -46,6 +46,7 @@
     <Compile Include="Entities\Vehicle.cs" />
     <Compile Include="GarageHandler.cs" />
     <Compile Include="MenuHandler.cs" />
+    <Compile Include="MenyCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\LimitedList.cs" />

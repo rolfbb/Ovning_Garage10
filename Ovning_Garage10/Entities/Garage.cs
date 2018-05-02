@@ -6,24 +6,20 @@ namespace Ovning_Garage10.Entities
 {
     internal class Garage<T> : IEnumerable<T> where T : Vehicle
     {
-        private Vehicle[] vehicles;
+        private T[] vehicles;
 
         private int NbrOfParkingLots { get; }
 
         public Garage(int nbrOfParkingLots)
         {
             NbrOfParkingLots = nbrOfParkingLots;
-            vehicles = new Vehicle[nbrOfParkingLots];
+            vehicles = new T[nbrOfParkingLots];
         }
 
-        internal bool AddVehicle()
+        internal bool AddVehicle(T vehicle)
         {
-            Console.WriteLine($"vehicles.Length: {vehicles.Length}, IsFull: {GetIsFull()}");
             if (GetIsFull()) return false;
-            Vehicle vehicle = new Vehicle("Car");
-            int freeSpot = GetFreeParkingSpotPosition(vehicles);
-            vehicles.SetValue(vehicle, freeSpot);
-            Console.WriteLine("Adding new vehicle done!");
+            vehicles.SetValue(vehicle, GetFreeParkingSpotPosition());
             return true;
         }
 
@@ -42,20 +38,18 @@ namespace Ovning_Garage10.Entities
             return isFull;
         }
 
-        private int GetFreeParkingSpotPosition(Vehicle[] vehicles)
+        private int GetFreeParkingSpotPosition()
         {
+            //NOTE: GetIsFull must be called first!
             int position = 0;
             for (int i = 0; i < NbrOfParkingLots; i++)
             {
-                var v = vehicles[i];
-                if (v == null)
+                if (vehicles[i] == null)
                 {
                     position = i;
                     break;
                 }
-                v.ToString();
             }
-            Console.WriteLine("Returning free position: " + position);
             return position;
         }
 
@@ -83,7 +77,7 @@ namespace Ovning_Garage10.Entities
         {
             foreach (var item in vehicles)
             {
-                yield return (T)item;
+                yield return item;
             }
         }
 
