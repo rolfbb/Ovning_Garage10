@@ -1,12 +1,26 @@
-﻿namespace Ovning_Garage10.Entities
+﻿using System;
+
+namespace Ovning_Garage10.Entities
 {
     internal class Vehicle
     {
-        private int nbrOfParkingLots;
+        private string type;
 
-        public Vehicle(int nbrOfParkingLots)
+        public string MyToString { get; set; }
+
+        public Vehicle(string type)
         {
-            this.nbrOfParkingLots = nbrOfParkingLots;
+            this.type = type;
+        }
+
+        internal string ToString()
+        {
+            return type; //TODO: Make something meaningfull here...
         }
     }
 }
+
+/*
+ * Sub classes: 
+ *  
+ */

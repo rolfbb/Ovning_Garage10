@@ -10,6 +10,12 @@ namespace Ovning_Garage10
 
         internal void Run()
         {
+            if (garage == null)
+            {
+                Console.WriteLine("Det finns inget garage - ett nytt garage behöver skapas.");
+                CreateNewGarage();
+            }
+
             bool run = true;
             MenuHandler.PrintMainMenu();
             do
@@ -18,23 +24,30 @@ namespace Ovning_Garage10
                 var key = Console.ReadKey(intercept: true).Key;
                 switch (key)
                 {
-                    case ConsoleKey.F: MenuHandler.PrintMainMenuCommandForKey(key); ListAllVehicles(); break;
-                    case ConsoleKey.T: MenuHandler.PrintMainMenuCommandForKey(key); ListVehicleTypes(); break;
-                    case ConsoleKey.L: MenuHandler.PrintMainMenuCommandForKey(key); AddVehicle(); break;
-                    case ConsoleKey.R: MenuHandler.PrintMainMenuCommandForKey(key); RemoveVehicle(); break;
-                    case ConsoleKey.S: MenuHandler.PrintMainMenuCommandForKey(key); SearchVehicleByRegNo(); break;
-                    case ConsoleKey.C: MenuHandler.PrintMainMenuCommandForKey(key); CreateNewGarage(); break;
-                    case ConsoleKey.Q: MenuHandler.PrintMainMenuCommandForKey(key); run = false; break;
+                    case ConsoleKey.F: MenuHandler.PrintMainMenuCommandForKey(key, false); ListAllVehicles(); break;
+                    case ConsoleKey.T: MenuHandler.PrintMainMenuCommandForKey(key, false); ListVehicleTypes(); break;
+                    case ConsoleKey.L: MenuHandler.PrintMainMenuCommandForKey(key, false); AddVehicle(); break;
+                    case ConsoleKey.R: MenuHandler.PrintMainMenuCommandForKey(key, false); RemoveVehicle(); break;
+                    case ConsoleKey.S: MenuHandler.PrintMainMenuCommandForKey(key, false); SearchVehicleByRegNo(); break;
+                    case ConsoleKey.C: MenuHandler.PrintMainMenuCommandForKey(key, false); CreateNewGarage(); break;
+                    case ConsoleKey.G: MenuHandler.PrintMainMenuCommandForKey(key, false); GetNbrOfFreeSpots(); break;
+                    case ConsoleKey.M: MenuHandler.PrintMainMenuCommandForKey(key, false); MenuHandler.PrintMainMenu(); break;
+                    case ConsoleKey.Q: MenuHandler.PrintMainMenuCommandForKey(key, false); run = false; break;
                 }
             } while (run);
 
+        }
+
+        private void GetNbrOfFreeSpots()
+        {
+            Console.WriteLine("Antal lediga parkeringsplatser: " + garage.GetNbrOfFreeSpots());
         }
 
         private void CreateNewGarage()
         {
             int nbrOfParkingLots = UI.AskForInt("Hur många parkeringslatser ska det vara i det nya garaget?");
             garage = new Garage<Vehicle>(nbrOfParkingLots);
-
+            Console.WriteLine($"Nytt garage med {nbrOfParkingLots} är skapat.");
         }
 
         private void SearchVehicleByRegNo()
@@ -47,9 +60,10 @@ namespace Ovning_Garage10
             throw new NotImplementedException();
         }
 
-        private void AddVehicle()
+        private bool AddVehicle()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("AddVehicle");
+            return garage.AddVehicle();
         }
 
         private void ListVehicleTypes()
@@ -59,14 +73,8 @@ namespace Ovning_Garage10
 
         private void ListAllVehicles()
         {
-            throw new NotImplementedException();
+            garage.ListAllVehicles();
         }
     }
 }
 
-//Console.WriteLine("*           1: Lista samtliga parkerade fordon                              *");
-//Console.WriteLine("*           2: Lista fordonstyper och hur många av varje som står i garaget *");
-//Console.WriteLine("*           3: Lägg till fordon                                             *");
-//Console.WriteLine("*           4: Ta bort fordon                                               *");
-//Console.WriteLine("*           M: Sök fordon via registreringsnumret                           *");
-//Console.WriteLine("*           Q: Avsluta                                                      *");
