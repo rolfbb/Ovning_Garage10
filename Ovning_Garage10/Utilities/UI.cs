@@ -26,5 +26,18 @@ namespace Ovning_Garage10.Utilities
             } while (!parsed);
             return retval;
         }
+
+        public static void TraceMessage(string message,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Console.WriteLine("\t=== TraceMessage ===");
+            Console.WriteLine("\t\tmessage: " + message);
+            Console.WriteLine("\t\tmember name: " + memberName);
+            Console.WriteLine("\t\tsource file path: " + sourceFilePath);
+            Console.WriteLine("\t\tsource line number: " + sourceLineNumber);
+            Console.WriteLine("\t=== End TraceMessage ===");
+        }
     }
 }

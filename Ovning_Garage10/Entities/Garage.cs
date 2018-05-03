@@ -25,17 +25,11 @@ namespace Ovning_Garage10.Entities
 
         public bool GetIsFull()
         {
-            bool isFull = true;
             foreach (var item in vehicles)
             {
-                if (item == null)
-                {
-                    isFull = false;
-                    break;
-                }
+                if (item == null) return false;
             }
-            Console.WriteLine("GetIsFull: " + isFull);
-            return isFull;
+            return true;
         }
 
         private int GetFreeParkingSpotPosition()
@@ -84,6 +78,11 @@ namespace Ovning_Garage10.Entities
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        internal void RemoveVehile(Vehicle vehicle)
+        {
+            throw new NotImplementedException();
         }
     }
 }
