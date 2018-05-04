@@ -24,6 +24,9 @@ namespace Ovning_Garage10.Entities
         public MotorVehicle()
         {
         }
+        public Car(string type, string color)
+        {
+        }
     }
 
     internal class Bicycle : Vehicle
@@ -52,10 +55,22 @@ namespace Ovning_Garage10.Entities
         public Car()
         {
         }
+        public Car(string type, string color)
+        {
+        }
+        public Car(string type, string color, string wheels)
+        {
+        }
     }
     internal class Bus : Vehicle
     {
         public Bus()
+        {
+        }
+        public Bus(string type, string color)
+        {
+        }
+        public Bus(string type, string color, string passengers)
         {
         }
     }
