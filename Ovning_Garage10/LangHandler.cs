@@ -22,13 +22,14 @@ namespace Ovning_Garage10
             var key = Console.ReadKey(intercept: true).Key;
             try
             {
+                Console.WriteLine("Key: " + key);
                 menuCommands[key.ToString()].Method();
             }
             catch (KeyNotFoundException)
             {
+                Console.WriteLine("Felhantering här?...");
                 UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
             }
-            //Console.WriteLine("Setting language done!");
         }
 
         private static void InitLangCommands()
@@ -39,7 +40,7 @@ namespace Ovning_Garage10
             menuCommands.Add("S", new MenuCommand { Description = "S", Method = () => SetLangSE() });
             menuCommands.Add("E", new MenuCommand { Description = "E", Method = () => SetLangEN() });
 
-            //PrintMenuCommands();
+            PrintMenuCommands();
         }
 
         private static void PrintMenuCommands()

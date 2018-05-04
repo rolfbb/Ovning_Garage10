@@ -43,6 +43,20 @@ namespace Ovning_Garage10
                 menuCommands = new Dictionary<string, MenuCommand>();
             return menuCommands;
         }
+
+        internal static void Add(Dictionary<string, MenuCommand> menuCommands, string key, MenuCommand command)
+        {
+            try
+            {
+                menuCommands.Add(key, command);
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine($"Error when adding command: {key} {command.Description} {e.Message}");
+            }
+        }
+
+
     }
 }
 

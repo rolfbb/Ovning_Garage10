@@ -33,22 +33,13 @@ namespace Ovning_Garage10
 
         private void Init()
         {
-            //SetLangSE();
+            Console.WriteLine("GH innan InitMessages");
             InitMessages();
+            Console.WriteLine("GH innan InitCommands");
             InitCommands();
             UI.WriteLine(Msg.message("noGarage"));
             CreateNewGarage();
         }
-
-        //private static void SetLangSE()
-        //{
-        //    Msg.SetLang("SE");
-        //}
-
-        //private static void SetLangEN()
-        //{
-        //    Msg.SetLang("EN");
-        //}
 
         private void InitMessages()
         {
@@ -58,15 +49,16 @@ namespace Ovning_Garage10
         private void InitCommands()
         {
             menuCommands = MenuHandler.InitCommands();
-            menuCommands.Add("F", new MenuCommand { Description = "F", Method = () => ListAllVehicles() });
-            menuCommands.Add("T", new MenuCommand { Description = "T", Method = () => ListVehicleTypes() });
-            menuCommands.Add("L", new MenuCommand { Description = "L", Method = () => AddVehicle() });
-            menuCommands.Add("R", new MenuCommand { Description = "R", Method = () => RemoveVehicle() });
-            menuCommands.Add("S", new MenuCommand { Description = "S", Method = () => SearchVehicleByRegNo() });
-            menuCommands.Add("C", new MenuCommand { Description = "C", Method = () => CreateNewGarage() });
-            menuCommands.Add("G", new MenuCommand { Description = "G", Method = () => PrintNbrOfFreeSpots() });
-            menuCommands.Add("M", new MenuCommand { Description = "M", Method = () => MenuHandler.PrintMainMenu() });
-            menuCommands.Add("Q", new MenuCommand { Description = "Q", Method = () => run = false });
+
+            MenuHandler.Add(menuCommands, "F", new MenuCommand { Description = "F", Method = () => ListAllVehicles() });
+            MenuHandler.Add(menuCommands, "T", new MenuCommand { Description = "T", Method = () => ListVehicleTypes() });
+            MenuHandler.Add(menuCommands, "L", new MenuCommand { Description = "L", Method = () => AddVehicle() });
+            MenuHandler.Add(menuCommands, "R", new MenuCommand { Description = "R", Method = () => RemoveVehicle() });
+            MenuHandler.Add(menuCommands, "S", new MenuCommand { Description = "S", Method = () => SearchVehicleByRegNo() });
+            MenuHandler.Add(menuCommands, "C", new MenuCommand { Description = "C", Method = () => CreateNewGarage() });
+            MenuHandler.Add(menuCommands, "G", new MenuCommand { Description = "G", Method = () => PrintNbrOfFreeSpots() });
+            MenuHandler.Add(menuCommands, "M", new MenuCommand { Description = "M", Method = () => MenuHandler.PrintMainMenu() });
+            MenuHandler.Add(menuCommands, "Q", new MenuCommand { Description = "Q", Method = () => run = false });
         }
 
         private int GetNbrOfFreeSpots()
