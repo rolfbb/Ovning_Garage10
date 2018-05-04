@@ -13,10 +13,7 @@ namespace Ovning_Garage10
 
         internal void Run()
         {
-            if (menuCommands == null)
-            {
-                Init();
-            }
+            Init();
 
             MenuHandler.PrintMainMenu();
             do
@@ -36,22 +33,22 @@ namespace Ovning_Garage10
 
         private void Init()
         {
-            SetLangSE();
+            //SetLangSE();
             InitMessages();
             InitCommands();
             UI.WriteLine(Msg.message("noGarage"));
             CreateNewGarage();
         }
 
-        private static void SetLangSE()
-        {
-            Msg.SetLang("SE");
-        }
+        //private static void SetLangSE()
+        //{
+        //    Msg.SetLang("SE");
+        //}
 
-        private static void SetLangEN()
-        {
-            Msg.SetLang("EN");
-        }
+        //private static void SetLangEN()
+        //{
+        //    Msg.SetLang("EN");
+        //}
 
         private void InitMessages()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ovning_Garage10.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Ovning_Garage10
         //Console.WriteLine(format);
         //Console.WriteLine("Kommando '{0}' finns ej!", "F");
 
-        private static string lang = "SE";
+        private static string lang;
         private static Dictionary<string, string> msgDictLANG = new Dictionary<string, string>();
         private static Dictionary<string, string> msgDictSE = new Dictionary<string, string>();
         private static Dictionary<string, string> msgDictEN = new Dictionary<string, string>();
@@ -24,12 +25,12 @@ namespace Ovning_Garage10
         internal static void SetLang(string language)
         {
             lang = language;
-            Console.WriteLine("Language is set to: " + lang);
+            //Console.WriteLine("Language is set to: " + lang);
         }
 
         internal static string message(string key)
         {
-            Console.WriteLine("Msg - lang..." + key);
+            //Console.WriteLine($"Msg lang: {lang}, key: {key}");
             var msgDict = GetDictionary();
 
             string msg;
@@ -40,14 +41,14 @@ namespace Ovning_Garage10
             catch (KeyNotFoundException)
             {
                 msg = String.Format("Message for key {0} not found!", key);
-                Console.WriteLine(msg);
+                UI.WriteLine(msg);
             }
             return msg;
         }
 
         private static Dictionary<string, string> GetDictionary()
         {
-            Console.WriteLine("GetDictionary.........");
+            //Console.WriteLine("GetDictionary...lang: " + lang);
             var msgDict = msgDictEN;
             switch (lang)
             {
@@ -67,18 +68,19 @@ namespace Ovning_Garage10
 
         internal static void InitMessages()
         {
+            //Console.WriteLine("InitMessages, lang: " + lang);
             switch (lang)
             {
                 case "LANG":
-                    Console.WriteLine("InitMessages - LANG");
+                    //Console.WriteLine("InitMessages - LANG");
                     InitMessagesLang();
                     break;
                 case "SE":
-                    Console.WriteLine("InitMessages - SE");
+                    //Console.WriteLine("InitMessages - SE");
                     InitMessagesSE();
                     break;
                 case "EN":
-                    Console.WriteLine("InitMessages - EN");
+                    //Console.WriteLine("InitMessages - EN");
                     InitMessagesEN();
                     break;
             }
@@ -115,7 +117,7 @@ namespace Ovning_Garage10
             msgDictSE.Add("Boat", "Båt");
 
             // Questions
-            msgDictSE.Add("nbrParkingSpots", "Hur många parkeringslatser ska det vara i det nya garaget?");
+            msgDictSE.Add("nbrParkingSpots", "Ange antal parkeringslatser för det nya garaget´: ");
 
             // Messages
             msgDictSE.Add("noGarage", "Det finns inget garage - ett nytt garage behöver skapas.");
@@ -152,7 +154,7 @@ namespace Ovning_Garage10
             msgDictEN.Add("Boat", "Boat");
 
             // Questions
-            msgDictEN.Add("nbrParkingSpots", "Enter number of parkings spots for the new garage");
+            msgDictEN.Add("nbrParkingSpots", "Enter number of parkings spots for the new garage: ");
 
             // Messages
             msgDictEN.Add("noGarage", "There's no garage - a new will be created.");

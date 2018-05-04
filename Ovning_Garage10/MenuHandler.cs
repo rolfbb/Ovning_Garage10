@@ -10,7 +10,7 @@ namespace Ovning_Garage10
 
         internal static void PrintMainMenu()
         {
-            InitCommands();
+            //InitCommands();
 
             UI.WriteLine("=============================================================================");
             UI.WriteLine(Msg.message("mainMenuHeader"));
@@ -25,7 +25,7 @@ namespace Ovning_Garage10
 
         internal static void PrintLangMenu()
         {
-            InitCommands();
+            //InitCommands();
 
             UI.WriteLine("=============================================================================");
             UI.WriteLine(Msg.message("langMenuHeader"));
@@ -39,7 +39,7 @@ namespace Ovning_Garage10
 
         internal static Dictionary<string, MenuCommand> InitCommands()
         {
-            if (menuCommands == null)
+            //if (menuCommands == null)
                 menuCommands = new Dictionary<string, MenuCommand>();
             return menuCommands;
         }

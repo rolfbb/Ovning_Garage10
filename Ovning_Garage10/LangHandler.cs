@@ -28,7 +28,7 @@ namespace Ovning_Garage10
             {
                 UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
             }
-            Console.WriteLine("Setting language done!");
+            //Console.WriteLine("Setting language done!");
         }
 
         private static void InitLangCommands()
