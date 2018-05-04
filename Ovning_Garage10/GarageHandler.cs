@@ -24,11 +24,11 @@ namespace Ovning_Garage10
                 var key = Console.ReadKey(intercept: true).Key;
                 try
                 {
-                menuCommands[key.ToString()].Method();
+                    menuCommands[key.ToString()].Method();
                 }
                 catch (KeyNotFoundException)
                 {
-                    Console.WriteLine($"Kommando '{key.ToString()}' finns ej!");
+                    UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
                 }
             } while (run);
 
@@ -36,10 +36,21 @@ namespace Ovning_Garage10
 
         private void Init()
         {
+            SetLangSE();
             InitMessages();
             InitCommands();
-            Console.WriteLine("Det finns inget garage - ett nytt garage behöver skapas.");
+            UI.WriteLine(Msg.message("noGarage"));
             CreateNewGarage();
+        }
+
+        private static void SetLangSE()
+        {
+            Msg.SetLang("SE");
+        }
+
+        private static void SetLangEN()
+        {
+            Msg.SetLang("EN");
         }
 
         private void InitMessages()
@@ -50,15 +61,15 @@ namespace Ovning_Garage10
         private void InitCommands()
         {
             menuCommands = MenuHandler.InitCommands();
-            menuCommands.Add("F", new MenuCommand { Description = "Listar samtliga parkerade fordon", Method = () => ListAllVehicles() });
-            menuCommands.Add("T", new MenuCommand { Description = "Listar fordonstyper och hur många av varje som står i garaget", Method = () => ListVehicleTypes() });
-            menuCommands.Add("L", new MenuCommand { Description = "Lägg till fordon", Method = () => AddVehicle() });
-            menuCommands.Add("R", new MenuCommand { Description = "Ta bort fordon", Method = () => RemoveVehicle() });
-            menuCommands.Add("S", new MenuCommand { Description = "Sök fordon via registreringsnumret", Method = () => SearchVehicleByRegNo() });
-            menuCommands.Add("C", new MenuCommand { Description = "Skapa nytt garage", Method = () => CreateNewGarage() });
-            menuCommands.Add("G", new MenuCommand { Description = "Antal lediga parkeringsplatser", Method = () => PrintNbrOfFreeSpots() });
-            menuCommands.Add("M", new MenuCommand { Description = "Huvudmeny", Method = () => MenuHandler.PrintMainMenu() });
-            menuCommands.Add("Q", new MenuCommand { Description = "Du har valt att avsluta programmet", Method = () => run = false });
+            menuCommands.Add("F", new MenuCommand { Description = "F", Method = () => ListAllVehicles() });
+            menuCommands.Add("T", new MenuCommand { Description = "T", Method = () => ListVehicleTypes() });
+            menuCommands.Add("L", new MenuCommand { Description = "L", Method = () => AddVehicle() });
+            menuCommands.Add("R", new MenuCommand { Description = "R", Method = () => RemoveVehicle() });
+            menuCommands.Add("S", new MenuCommand { Description = "S", Method = () => SearchVehicleByRegNo() });
+            menuCommands.Add("C", new MenuCommand { Description = "C", Method = () => CreateNewGarage() });
+            menuCommands.Add("G", new MenuCommand { Description = "G", Method = () => PrintNbrOfFreeSpots() });
+            menuCommands.Add("M", new MenuCommand { Description = "M", Method = () => MenuHandler.PrintMainMenu() });
+            menuCommands.Add("Q", new MenuCommand { Description = "Q", Method = () => run = false });
         }
 
         private int GetNbrOfFreeSpots()
@@ -68,14 +79,14 @@ namespace Ovning_Garage10
 
         private void PrintNbrOfFreeSpots()
         {
-            Console.WriteLine("Antal lediga parkeringsplatser: " + GetNbrOfFreeSpots());
+            UI.WriteLine("nbrFreeSpots: " + GetNbrOfFreeSpots());
         }
 
         private void CreateNewGarage()
         {
-            int nbrOfParkingLots = UI.AskForInt("Hur många parkeringslatser ska det vara i det nya garaget?");
+            int nbrOfParkingLots = UI.AskForInt(Msg.message("nbrParkingSpots"));
             garage = new Garage<Vehicle>(nbrOfParkingLots);
-            Console.WriteLine($"Nytt garage med {nbrOfParkingLots} är skapat.");
+            UI.WriteLine(Msg.message("newGarageCreated"), nbrOfParkingLots);
         }
 
         private void SearchVehicleByRegNo()
@@ -85,7 +96,7 @@ namespace Ovning_Garage10
 
         private void RemoveVehicle()
         {
-            Vehicle vehicle = new Vehicle("Car");
+            Vehicle vehicle = new Vehicle();
 
             garage.RemoveVehile(vehicle);
         }
@@ -96,10 +107,10 @@ namespace Ovning_Garage10
             Vehicle vehicle = new Car();
             Console.WriteLine("Nytt fordon: " + vehicle.GetType().Name + " " + Msg.message(vehicle.GetType().Name));
             bool retval = garage.AddVehicle(vehicle);
-            if(retval)
-                Console.WriteLine($"Fordonet är parkerat. Det finns {GetNbrOfFreeSpots()} platser kvar.");
+            if (retval)
+                Console.WriteLine(Msg.message("vehicleIsParked"), GetNbrOfFreeSpots());
             else
-                Console.WriteLine($"Det går inte att parkera; det finns {GetNbrOfFreeSpots()} platser kvar.");
+                Console.WriteLine(Msg.message("noFreeSpots"), GetNbrOfFreeSpots());
             return retval;
         }
 

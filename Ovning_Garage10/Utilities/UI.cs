@@ -21,10 +21,40 @@ namespace Ovning_Garage10.Utilities
                 parsed = int.TryParse(answer, out retval);
                 if (!parsed)
                 {
-                    Console.WriteLine($"Du får bara använda siffror i svaret. Du skrev: \"{answer}\".");
+                    WriteLine(Msg.message("onlyNumbersIsAllowed"), answer);
                 }
             } while (!parsed);
             return retval;
+        }
+
+        public static void Write(string message)
+        {
+            Console.Write(message);
+        }
+
+        public static void WriteLine(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void WriteLine(string compositeFormat, object arg0)
+        {
+            Console.WriteLine(compositeFormat, arg0);
+        }
+
+        public static void WriteLine(string compositeFormat, object arg0, object arg1)
+        {
+            Console.WriteLine(compositeFormat, arg0, arg1);
+        }
+
+        public static void WriteLine(string compositeFormat, object arg0, object arg1, object arg2)
+        {
+            Console.WriteLine(compositeFormat, arg0, arg1, arg2);
+        }
+
+        public static void WriteLine(string compositeFormat, object arg0, object arg1, object arg2, object arg3)
+        {
+            Console.WriteLine(compositeFormat, arg0, arg1, arg2, arg3);
         }
 
         public static void TraceMessage(string message,

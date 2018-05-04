@@ -4,22 +4,32 @@ namespace Ovning_Garage10.Entities
 {
     internal class Vehicle
     {
-        private string type;
+        //color
+        //lenght
+        //noOfWheels
+        //fuelType
+        //noOfSeats
 
-        public string MyToString { get; set; }
+        //cylinderVolume
+        //noOfEngines
+        //regNo
 
         public Vehicle()
         {
         }
+    }
 
-        public Vehicle(string type)
+    internal class MotorVehicle : Vehicle
+    {
+        public MotorVehicle()
         {
-            this.type = type;
         }
+    }
 
-        public override string ToString()
+    internal class Bicycle : Vehicle
+    {
+        public Bicycle()
         {
-            return type; //TODO: Make something meaningfull here...
         }
     }
 
@@ -27,9 +37,16 @@ namespace Ovning_Garage10.Entities
     {
         public Airplane()
         {
-
         }
     }
+
+    internal class RegisteredVehicle : Vehicle
+    {
+        public RegisteredVehicle()
+        {
+        }
+    }
+
     internal class Car : Vehicle
     {
         public Car()
@@ -58,12 +75,3 @@ namespace Ovning_Garage10.Entities
     }
 }
 
-/*
- * Sub classes: 
- *          Car
- *          Airplane
- *          Motorcycle
- *          Bus
- *          Boat
- *  
- */

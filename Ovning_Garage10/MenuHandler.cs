@@ -12,15 +12,29 @@ namespace Ovning_Garage10
         {
             InitCommands();
 
-            Console.WriteLine("=============================================================================");
-            Console.WriteLine("*         Garage - Huvudmeny                                              ");
-            Console.WriteLine("=============================================================================");
-            Console.WriteLine(menuCommands.Count);
+            UI.WriteLine("=============================================================================");
+            UI.WriteLine(Msg.message("mainMenuHeader"));
+            UI.WriteLine("=============================================================================");
+            UI.WriteLine(menuCommands.Count.ToString());
             foreach (var item in menuCommands)
             {
                 Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
             }
-            Console.WriteLine("=============================================================================");
+            UI.WriteLine("=============================================================================");
+        }
+
+        internal static void PrintLangMenu()
+        {
+            InitCommands();
+
+            UI.WriteLine("=============================================================================");
+            UI.WriteLine(Msg.message("langMenuHeader"));
+            UI.WriteLine("=============================================================================");
+            foreach (var item in menuCommands)
+            {
+                Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
+            }
+            UI.WriteLine("=============================================================================");
         }
 
         internal static Dictionary<string, MenuCommand> InitCommands()
