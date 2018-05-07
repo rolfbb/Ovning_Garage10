@@ -40,7 +40,7 @@ namespace Ovning_Garage10
             }
             catch (KeyNotFoundException)
             {
-                msg = String.Format($"Message for key {key} not found!");
+                msg = String.Format($"Message for key {key} ({lang}) not found!");
                 UI.WriteLine(msg);
             }
             return msg;

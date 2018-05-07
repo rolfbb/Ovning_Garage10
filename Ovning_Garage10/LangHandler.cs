@@ -8,29 +8,17 @@ namespace Ovning_Garage10
     {
         private static Dictionary<string, MenuCommand> menuCommands;
 
-        internal static void SetLanguage()
+        internal static bool AskAndSetLanguage()
         {
-            AskAndSetLanguage();
-        }
-
-        private static void AskAndSetLanguage()
-        {
+            bool retval;
             InitLangCommands();
 
             MenuHandler.PrintLangMenu();
+            retval = MenuHandler.ReadAndExecuteCommand(init: true);
 
-            var key = Console.ReadKey(intercept: true).Key;
-            try
-            {
-                Console.WriteLine("Key: " + key);
-                menuCommands[key.ToString()].Method();
-            }
-            catch (KeyNotFoundException)
-            {
-                Console.WriteLine("Felhantering här?...");
-                UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
-            }
+            return retval;
         }
+
 
         private static void InitLangCommands()
         {

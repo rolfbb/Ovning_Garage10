@@ -4,89 +4,80 @@ namespace Ovning_Garage10.Entities
 {
     internal class Vehicle
     {
-        //color
-        //lenght
-        //noOfWheels
-        //fuelType
-        //noOfSeats
-
-        //cylinderVolume
-        //noOfEngines
-        //regNo
-
         public Vehicle()
         {
         }
+
+        public Vehicle(string color, float length, int noOfWheels, int noOfSeats)
+        {
+            Color = color;
+            Length = length;
+            NoOfWheels = noOfWheels;
+            NoOfSeats = noOfSeats;
+        }
+
+        internal string Color { get; set; }
+        internal float Length { get; set; }
+        internal int NoOfWheels { get; set; }
+        internal int NoOfSeats { get; set; }
     }
 
-    internal class MotorVehicle : Vehicle
+    internal partial class MotorVehicle : Vehicle
     {
         public MotorVehicle()
         {
         }
-        public Car(string type, string color)
+
+        public MotorVehicle(//string color, float length, int noOfWheels, int noOfSeats,
+                               string fuel, string regNo, int cylinderVolume, int noOfEngines)
         {
+            //Color = color;
+            //Length = length;
+            //NoOfWheels = noOfWheels;
+            //NoOfSeats = noOfSeats;
+
+            Fuel = fuel;
+            RegNo = regNo;
+            CylinderVolume = cylinderVolume;
+            NoOfEngines = noOfEngines;
         }
+
+        internal string Fuel { get; set; }
+        internal string RegNo { get; set; }
+        internal int CylinderVolume { get; set; }
+        internal int NoOfEngines { get; set; }
     }
 
-    internal class Bicycle : Vehicle
+    internal class Car : MotorVehicle
     {
-        public Bicycle()
-        {
-        }
     }
 
-    internal class Airplane : Vehicle
+    internal class Bus : MotorVehicle
     {
-        public Airplane()
-        {
-        }
     }
 
-    internal class RegisteredVehicle : Vehicle
+    internal class Motorcycle : MotorVehicle
     {
-        public RegisteredVehicle()
-        {
-        }
     }
 
-    internal class Car : Vehicle
+    internal class Airplane : MotorVehicle
     {
-        public Car()
-        {
-        }
-        public Car(string type, string color)
-        {
-        }
-        public Car(string type, string color, string wheels)
-        {
-        }
+		public Airplane()
+		{
+		}
+		//protected Airplane(string fuel, string regNo, int cylinderVolume, int noOfEngines) : base(fuel, regNo, cylinderVolume, noOfEngines)
+		//{
+		//}
+		
     }
-    internal class Bus : Vehicle
+    internal partial class Boat : Vehicle
     {
-        public Bus()
+        public Boat(int typeOfBoat)
         {
+            TypeOfBoat = typeOfBoat;
         }
-        public Bus(string type, string color)
-        {
-        }
-        public Bus(string type, string color, string passengers)
-        {
-        }
-    }
 
-    internal class Motorcycle : Vehicle
-    {
-        public Motorcycle()
-        {
-        }
-    }
-
-    internal class Boat : Vehicle
-    {
-        public Boat()
-        {
-        }
+        internal int TypeOfBoat { get; set; }
     }
 }
 

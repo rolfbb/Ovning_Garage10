@@ -18,15 +18,16 @@ namespace Ovning_Garage10
             MenuHandler.PrintMainMenu();
             do
             {
-                var key = Console.ReadKey(intercept: true).Key;
-                try
-                {
-                    menuCommands[key.ToString()].Method();
-                }
-                catch (KeyNotFoundException)
-                {
-                    UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
-                }
+                MenuHandler.ReadAndExecuteCommand();
+                //var key = Console.ReadKey(intercept: true).Key;
+                //try
+                //{
+                //    menuCommands[key.ToString()].Method();
+                //}
+                //catch (KeyNotFoundException)
+                //{
+                //    UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
+                //}
             } while (run);
 
         }
@@ -85,7 +86,7 @@ namespace Ovning_Garage10
 
         private void RemoveVehicle()
         {
-            Vehicle vehicle = new Vehicle();
+            Vehicle vehicle = new Car();
 
             garage.RemoveVehile(vehicle);
         }

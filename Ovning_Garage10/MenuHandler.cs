@@ -40,7 +40,7 @@ namespace Ovning_Garage10
         internal static Dictionary<string, MenuCommand> InitCommands()
         {
             //if (menuCommands == null)
-                menuCommands = new Dictionary<string, MenuCommand>();
+            menuCommands = new Dictionary<string, MenuCommand>();
             return menuCommands;
         }
 
@@ -56,6 +56,39 @@ namespace Ovning_Garage10
             }
         }
 
+        internal static bool ReadAndExecuteCommand()
+        {
+            return ReadAndExecuteCommand(false);
+        }
+
+        internal static bool ReadAndExecuteCommand(bool init)
+        {
+            bool retval; // Kludge alert!
+            var key = Console.ReadKey(intercept: true).Key;
+            string answerValue = key.ToString();
+            try
+            {
+                Console.WriteLine("Key: " + key + ", " + answerValue);
+                if (menuCommands.ContainsKey(answerValue))
+                    menuCommands[key.ToString()].Method();
+                else
+                    UI.WriteLine(Msg.message("nonExistingCommand"), answerValue);
+
+                retval = true;
+            }
+            catch (KeyNotFoundException)
+            {
+                retval = false;
+                UI.WriteLine(Msg.message("nonExistingCommand"), answerValue);
+
+                //OS X check...
+                if (init && answerValue == "0")
+                    UI.WriteLine("Running on Mac? Set 'Run on external console' in Project options");
+
+            }
+
+            return retval;
+        }
 
     }
 }
