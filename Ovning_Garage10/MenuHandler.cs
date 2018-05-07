@@ -6,7 +6,11 @@ namespace Ovning_Garage10
 {
     internal class MenuHandler
     {
-        private static Dictionary<string, MenuCommand> menuCommands;
+		private static Dictionary<string, MenuCommand> langMenuCommands;
+        private static Dictionary<string, MenuCommand> mainMenuCommands;
+        private static Dictionary<string, MenuCommand> addVehicleMenuCommands;
+        private static Dictionary<string, MenuCommand> searchVehicleMenuCommands;
+        private static Dictionary<string, MenuCommand> removeVehicleMenuCommands;
 
         internal static void PrintMainMenu()
         {
@@ -15,10 +19,10 @@ namespace Ovning_Garage10
             UI.WriteLine("=============================================================================");
             UI.WriteLine(Msg.message("mainMenuHeader"));
             UI.WriteLine("=============================================================================");
-            UI.WriteLine(menuCommands.Count.ToString());
-            foreach (var item in menuCommands)
+            UI.WriteLine(mainMenuCommands.Count.ToString());
+            foreach (var item in mainMenuCommands)
             {
-                Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
+                Console.WriteLine(item.Key + ": " + mainMenuCommands[item.Key].Description);
             }
             UI.WriteLine("=============================================================================");
         }
@@ -30,9 +34,9 @@ namespace Ovning_Garage10
             UI.WriteLine("=============================================================================");
             UI.WriteLine(Msg.message("langMenuHeader"));
             UI.WriteLine("=============================================================================");
-            foreach (var item in menuCommands)
+            foreach (var item in mainMenuCommands)
             {
-                Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
+                Console.WriteLine(item.Key + ": " + mainMenuCommands[item.Key].Description);
             }
             UI.WriteLine("=============================================================================");
         }
@@ -40,8 +44,8 @@ namespace Ovning_Garage10
         internal static Dictionary<string, MenuCommand> InitCommands()
         {
             //if (menuCommands == null)
-            menuCommands = new Dictionary<string, MenuCommand>();
-            return menuCommands;
+            mainMenuCommands = new Dictionary<string, MenuCommand>();
+            return mainMenuCommands;
         }
 
         internal static void Add(Dictionary<string, MenuCommand> menuCommands, string key, MenuCommand command)
@@ -69,8 +73,8 @@ namespace Ovning_Garage10
             try
             {
                 Console.WriteLine("Key: " + key + ", " + answerValue);
-                if (menuCommands.ContainsKey(answerValue))
-                    menuCommands[key.ToString()].Method();
+                if (mainMenuCommands.ContainsKey(answerValue))
+                    mainMenuCommands[key.ToString()].Method();
                 else
                     UI.WriteLine(Msg.message("nonExistingCommand"), answerValue);
 

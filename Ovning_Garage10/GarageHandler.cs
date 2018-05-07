@@ -19,15 +19,6 @@ namespace Ovning_Garage10
             do
             {
                 MenuHandler.ReadAndExecuteCommand();
-                //var key = Console.ReadKey(intercept: true).Key;
-                //try
-                //{
-                //    menuCommands[key.ToString()].Method();
-                //}
-                //catch (KeyNotFoundException)
-                //{
-                //    UI.WriteLine(Msg.message("nonExistingCommand"), key.ToString());
-                //}
             } while (run);
 
         }
