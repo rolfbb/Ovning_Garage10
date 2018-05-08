@@ -3,6 +3,7 @@
 
     internal partial class Boat
     {
+        //
         enum BoatType { MotorBoat, SailBoat }
     }
 }
