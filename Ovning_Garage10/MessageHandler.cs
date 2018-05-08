@@ -111,15 +111,18 @@ namespace Ovning_Garage10
             var dict = msgDictLANG;
 
             // Dictionary id
-           Add(dict, "DICT", "msgDictLANG");
+            Add(dict, "DICT", "msgDictLANG");
 
+            // Menu
+            Add(dict, "menuSeparator", "============================================================================");
+            Add(dict, "langMenuHeader", "Garage - Select language");
+			
             // Commands
-           Add(dict, "S", "Svenska");
-           Add(dict, "E", "Engelska");
+            Add(dict, "S", "Svenska");
+            Add(dict, "E", "Engelska");
 
-           Add(dict, "langMenuHeader", "Garage - Select language");
-           Add(dict, "notDefinedMessage", "<not defined>");
-           Add(dict, "nonExistingCommand", "Kommando '{0}' finns ej!");
+            Add(dict, "notDefinedMessage", "<not defined>");
+            Add(dict, "nonExistingCommand", "Kommando '{0}' finns ej!");
         }
 
         private static void InitMessagesSE()
@@ -130,6 +133,10 @@ namespace Ovning_Garage10
             // Dictionary id
             dict.Add("DICT", "msgDictSE");
 
+            // Menu
+            Add(dict, "menuSeparator", "============================================================================");
+            Add(dict, "mainMenuHeader", "*         Garage - Huvudmeny");
+			
             // Commands
             Add(dict, "F", "Listar samtliga parkerade fordon");
             Add(dict, "T", "Listar fordonstyper och hur många av varje som står i garaget");
@@ -160,64 +167,10 @@ namespace Ovning_Garage10
             Add(dict, "noFreeSpots", "Det går inte att parkera; det finns {0} platser kvar.");
             Add(dict, "onlyNumbersIsAllowed", "Du får bara använda siffror i svaret. Du skrev: \"{0}\".");
             Add(dict, "vehicleColon", "Fordon: ");
-            Add(dict, "mainMenuHeader", "*         Garage - Huvudmeny");
             Add(dict, "notDefinedMessage", "<inte angivet>");
 
         }
 
-        //private static void InitMessagesLang()
-        //{
-        //    // Dictionary id
-        //    msgDictLANG.Add("DICT", "msgDictLANG");
-
-        //    // Commands
-        //    msgDictLANG.Add("S", "Svenska");
-        //    msgDictLANG.Add("E", "Engelska");
-
-        //    msgDictLANG.Add("langMenuHeader", "Garage - Select language");
-        //    msgDictLANG.Add("notDefinedMessage", "<not defined>");
-        //    msgDictLANG.Add("nonExistingCommand", "Kommando '{0}' finns ej!");
-        //}
-
-        //private static void InitMessagesSE()
-        //{
-        //    // Dictionary id
-        //    msgDictSE.Add("DICT", "msgDictSE");
-
-        //    // Commands
-        //    msgDictSE.Add("F", "Listar samtliga parkerade fordon");
-        //    msgDictSE.Add("T", "Listar fordonstyper och hur många av varje som står i garaget");
-        //    msgDictSE.Add("L", "Lägg till fordon");
-        //    msgDictSE.Add("R", "Ta bort fordon");
-        //    msgDictSE.Add("S", "Sök fordon via registreringsnumret");
-        //    msgDictSE.Add("C", "Skapa nytt garage");
-        //    msgDictSE.Add("G", "Antal lediga parkeringsplatser");
-        //    msgDictSE.Add("M", "Huvudmeny");
-        //    msgDictSE.Add("Q", "Du har valt att avsluta programmet");
-
-        //    // Vechicles
-        //    msgDictSE.Add("Airplane", "Flygplan");
-        //    msgDictSE.Add("Car", "Bil");
-        //    msgDictSE.Add("Bus", "Buss");
-        //    msgDictSE.Add("Motorcycle", "Motorcykel");
-        //    msgDictSE.Add("Boat", "Båt");
-
-        //    // Questions
-        //    msgDictSE.Add("nbrParkingSpots", "Ange antal parkeringslatser för det nya garaget´: ");
-
-        //    // Messages
-        //    msgDictSE.Add("noGarage", "Det finns inget garage - ett nytt garage behöver skapas.");
-        //    msgDictSE.Add("nonExistingCommand", "Kommando '{0}' finns ej!");
-        //    msgDictSE.Add("newGarageCreated", "Nytt garage med {0} är skapat.");
-        //    msgDictSE.Add("nbrFreeSpots", "Antal lediga parkeringsplatser");
-        //    msgDictSE.Add("vehicleIsParked", "Fordonet är parkerat. Det finns {0} platser kvar.");
-        //    msgDictSE.Add("noFreeSpots", "Det går inte att parkera; det finns {0} platser kvar.");
-        //    msgDictSE.Add("onlyNumbersIsAllowed", "Du får bara använda siffror i svaret. Du skrev: \"{0}\".");
-        //    msgDictSE.Add("vehicleColon", "Fordon: ");
-        //    msgDictSE.Add("mainMenuHeader", "*         Garage - Huvudmeny");
-        //    msgDictSE.Add("notDefinedMessage", "<inte angivet>");
-
-        //}
         private static void InitMessagesEN()
         {
             // Generic name
@@ -225,7 +178,11 @@ namespace Ovning_Garage10
 
             // Dictionary id
             Add(dict, "DICT", "msgDictEN");
-            
+
+            // Menu
+            Add(dict, "menuSeparator", "============================================================================");
+            Add(dict, "mainMenuHeader", "*         Garage - Main Menu");
+
             // Commands
             Add(dict, "F", "Listing parked vehicles");
             Add(dict, "T", "Listing types and quantity of vechicles in the garage");
@@ -256,7 +213,6 @@ namespace Ovning_Garage10
             Add(dict, "noFreeSpots", "It is not possible to park now; there are {0} parking spots left.");
             Add(dict, "onlyNumbersIsAllowed", "You may only use numbers in the answer. You wrote: \"{0}\".");
             Add(dict, "vehicleColon", "Vehicle: ");
-            Add(dict, "mainMenuHeader", "*         Garage - Main Menu");
             Add(dict, "notDefinedMessage", "<not defined>");
 
         }

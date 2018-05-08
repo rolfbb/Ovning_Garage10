@@ -8,42 +8,35 @@ namespace Ovning_Garage10
     {
 		private static Dictionary<string, MenuCommand> langMenuCommands;
         private static Dictionary<string, MenuCommand> mainMenuCommands;
-        private static Dictionary<string, MenuCommand> addVehicleMenuCommands;
-        private static Dictionary<string, MenuCommand> searchVehicleMenuCommands;
-        private static Dictionary<string, MenuCommand> removeVehicleMenuCommands;
+        //private static Dictionary<string, MenuCommand> addVehicleMenuCommands;
+        //private static Dictionary<string, MenuCommand> searchVehicleMenuCommands;
+        //private static Dictionary<string, MenuCommand> removeVehicleMenuCommands;
 
+		internal static void PrintLangMenu()
+		{
+			PrintMenu("langMenuHeader", langMenuCommands);
+		}
+		
         internal static void PrintMainMenu()
         {
-            //InitCommands();
-
-            UI.WriteLine("=============================================================================");
-            UI.WriteLine(Msg.message("mainMenuHeader"));
-            UI.WriteLine("=============================================================================");
-            UI.WriteLine(mainMenuCommands.Count.ToString());
-            foreach (var item in mainMenuCommands)
-            {
-                Console.WriteLine(item.Key + ": " + mainMenuCommands[item.Key].Description);
-            }
-            UI.WriteLine("=============================================================================");
+            PrintMenu("mainMenuHeader", mainMenuCommands);
         }
 
-        internal static void PrintLangMenu()
+        internal static void PrintMenu(string menu, Dictionary<string, MenuCommand> menuCommands)
         {
-            //InitCommands();
+            UI.WriteLine(Msg.message("menuSeparator"));
+            UI.WriteLine(Msg.message(menu + "Header"));
+            UI.WriteLine(Msg.message("menuSeparator"));
 
-            UI.WriteLine("=============================================================================");
-            UI.WriteLine(Msg.message("langMenuHeader"));
-            UI.WriteLine("=============================================================================");
-            foreach (var item in mainMenuCommands)
+            foreach (var item in menuCommands)
             {
-                Console.WriteLine(item.Key + ": " + mainMenuCommands[item.Key].Description);
+                Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
             }
-            UI.WriteLine("=============================================================================");
+            UI.WriteLine(Msg.message("menuSeparator"));
         }
 
         internal static Dictionary<string, MenuCommand> InitCommands()
         {
-            //if (menuCommands == null)
             mainMenuCommands = new Dictionary<string, MenuCommand>();
             return mainMenuCommands;
         }
@@ -88,7 +81,6 @@ namespace Ovning_Garage10
                 //OS X check...
                 if (init && answerValue == "0")
                     UI.WriteLine("Running on Mac? Set 'Run on external console' in Project options");
-
             }
 
             return retval;
