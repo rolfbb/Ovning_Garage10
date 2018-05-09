@@ -6,36 +6,44 @@ namespace Ovning_Garage10
 {
     internal class MenuHandler
     {
-		private static Dictionary<string, MenuCommand> langMenuCommands;
+        private static Dictionary<string, MenuCommand> langMenuCommands;
         private static Dictionary<string, MenuCommand> mainMenuCommands;
         //private static Dictionary<string, MenuCommand> addVehicleMenuCommands;
         //private static Dictionary<string, MenuCommand> searchVehicleMenuCommands;
         //private static Dictionary<string, MenuCommand> removeVehicleMenuCommands;
 
-		internal static void PrintLangMenu()
-		{
-			PrintMenu("langMenuHeader", langMenuCommands);
-		}
-		
+        internal static void PrintLangMenu()
+        {
+            Console.Clear();
+            PrintMenu("langMenuHeader", langMenuCommands);
+        }
+
         internal static void PrintMainMenu()
         {
+            Console.Clear();
             PrintMenu("mainMenuHeader", mainMenuCommands);
         }
 
         internal static void PrintMenu(string menu, Dictionary<string, MenuCommand> menuCommands)
         {
-            UI.WriteLine(Msg.message("menuSeparator"));
-            UI.WriteLine(Msg.message(menu + "Header"));
-            UI.WriteLine(Msg.message("menuSeparator"));
+            UI.WriteLine(MessageHandler.message("menuSeparator"));
+            UI.WriteLine(MessageHandler.message(menu));
+            UI.WriteLine(MessageHandler.message("menuSeparator"));
 
             foreach (var item in menuCommands)
             {
                 Console.WriteLine(item.Key + ": " + menuCommands[item.Key].Description);
             }
-            UI.WriteLine(Msg.message("menuSeparator"));
+            UI.WriteLine(MessageHandler.message("menuSeparator"));
         }
 
-        internal static Dictionary<string, MenuCommand> InitCommands()
+        internal static Dictionary<string, MenuCommand> InitLangMenuCommands()
+        {
+            langMenuCommands = new Dictionary<string, MenuCommand>();
+            return langMenuCommands;
+        }
+
+        internal static Dictionary<string, MenuCommand> InitMainMenuCommands()
         {
             mainMenuCommands = new Dictionary<string, MenuCommand>();
             return mainMenuCommands;
@@ -49,41 +57,47 @@ namespace Ovning_Garage10
             }
             catch (ArgumentException e)
             {
-                Console.WriteLine($"Error when adding command: {key} {command.Description} {e.Message}");
+                UI.ErrorLine("Error when adding command: {0} {1} {2}", key, command.Description, e.Message);
             }
         }
 
-        internal static bool ReadAndExecuteCommand()
+        internal static bool ReadAndExecuteCommand(Dictionary<string, MenuCommand> menuCommands)
         {
-            return ReadAndExecuteCommand(false);
+            return ReadAndExecuteCommand(menuCommands, initLang: false);
         }
 
-        internal static bool ReadAndExecuteCommand(bool init)
+        internal static bool ReadAndExecuteCommand(Dictionary<string, MenuCommand> menuCommands, bool initLang)
         {
-            bool retval; // Kludge alert!
+            bool success;
+
             var key = Console.ReadKey(intercept: true).Key;
-            string answerValue = key.ToString();
+            string keyString = key.ToString();
+            //UI.WriteLine("Key: " + key + ", " + keyString);
+
             try
             {
-                Console.WriteLine("Key: " + key + ", " + answerValue);
-                if (mainMenuCommands.ContainsKey(answerValue))
-                    mainMenuCommands[key.ToString()].Method();
+                if (menuCommands.ContainsKey(keyString))
+                {
+                    menuCommands[key.ToString()].Method();
+                    success = true;
+                }
                 else
-                    UI.WriteLine(Msg.message("nonExistingCommand"), answerValue);
+                {
+                    UI.ErrorLine(MessageHandler.message("nonExistingCommand"), key);
+                    success = false;
 
-                retval = true;
+                    //OS X check...
+                    if (initLang && keyString == "0")
+                        UI.ErrorLine("Running on Mac? Set 'Run on external console' in Project options");
+                }
             }
-            catch (KeyNotFoundException)
+            catch (Exception e)
             {
-                retval = false;
-                UI.WriteLine(Msg.message("nonExistingCommand"), answerValue);
-
-                //OS X check...
-                if (init && answerValue == "0")
-                    UI.WriteLine("Running on Mac? Set 'Run on external console' in Project options");
+                success = false;
+                UI.ErrorLine(MessageHandler.message("readAndExecuteCommandFailure"), key, e.Message);
             }
 
-            return retval;
+            return success;
         }
 
     }

@@ -63,7 +63,7 @@ namespace Ovning_Garage10.Entities
             foreach (var item in this)
             {
                 if (item != null)
-                    Console.WriteLine(Msg.message("vehicleColon") + item.ToString());
+                    Console.WriteLine(MessageHandler.message("vehicleColon") + item.ToString());
             }
         }
 

@@ -13,10 +13,8 @@ namespace Ovning_Garage10
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Program.Main().......");
-            bool ok = LangUtil.AskAndSetLanguage();
-            if (ok)
-                garage.Run();
+            LangHandler.AskAndSetLanguage();
+            garage.Run();
         }
 
     }

@@ -4,17 +4,20 @@ using System.Collections.Generic;
 
 namespace Ovning_Garage10
 {
-    internal class LangUtil
+    internal class LangHandler
     {
-        private static Dictionary<string, MenuCommand> menuCommands;
+        private static Dictionary<string, MenuCommand> langMenuCommands;
 
         internal static bool AskAndSetLanguage()
         {
             bool retval;
             InitLangCommands();
-
             MenuHandler.PrintLangMenu();
-            retval = MenuHandler.ReadAndExecuteCommand(init: true);
+
+            do
+            {
+                retval = MenuHandler.ReadAndExecuteCommand(langMenuCommands, initLang: true);
+            } while (!retval);
 
             return retval;
         }
@@ -24,39 +27,39 @@ namespace Ovning_Garage10
         {
             SetLangLANG();
             InitMessages();
-            menuCommands = MenuHandler.InitCommands();
-            menuCommands.Add("S", new MenuCommand { Description = "S", Method = () => SetLangSE() });
-            menuCommands.Add("E", new MenuCommand { Description = "E", Method = () => SetLangEN() });
+            langMenuCommands = MenuHandler.InitLangMenuCommands();
+            MenuHandler.Add(langMenuCommands, "S", new MenuCommand { Description = "S", Method = () => SetLangSE() });
+            MenuHandler.Add(langMenuCommands, "E", new MenuCommand { Description = "E", Method = () => SetLangEN() });
 
             PrintMenuCommands();
         }
 
         private static void PrintMenuCommands()
         {
-            foreach (var item in menuCommands)
+            foreach (var item in langMenuCommands)
             {
-                Console.WriteLine("LANG commands: " + item.Key + ": " + menuCommands[item.Key].Description);
+                Console.WriteLine("LANG commands: " + item.Key + ": " + langMenuCommands[item.Key].Description);
             }
         }
 
         private static void InitMessages()
         {
-            Msg.InitMessages();
+            MessageHandler.InitMessages();
         }
 
         private static void SetLangLANG()
         {
-            Msg.SetLang("LANG");
+            MessageHandler.SetLang("LANG");
         }
 
-        private static void SetLangEN()
+        internal static void SetLangEN()
         {
-            Msg.SetLang("EN");
+            MessageHandler.SetLang("EN");
         }
 
         private static void SetLangSE()
         {
-            Msg.SetLang("SE");
+            MessageHandler.SetLang("SE");
         }
 
     }

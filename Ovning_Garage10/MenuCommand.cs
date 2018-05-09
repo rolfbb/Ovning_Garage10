@@ -15,7 +15,7 @@ namespace Ovning_Garage10
             get => description;
             set
             {
-                description = Msg.message(value);
+                description = MessageHandler.message(value);
                 //Console.WriteLine("value: " + value + " description: " + description);
             }
         }

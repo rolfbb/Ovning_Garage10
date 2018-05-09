@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ovning_Garage10
 {
-    class Msg
+    class MessageHandler
     {
         ////How to use custom format when storing 'custom format string':
         //// https://stackoverflow.com/questions/29844514/string-format-variable-in-composite-string-format?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
@@ -25,12 +25,15 @@ namespace Ovning_Garage10
         internal static void SetLang(string language)
         {
             lang = language;
-            UI.WriteLine("Language is set to: " + lang);
+        }
+
+        internal static string GetLang()
+        {
+            return lang;
         }
 
         internal static string message(string key)
         {
-            //Console.WriteLine($"Msg lang: {lang}, key: {key}");
             var msgDict = GetDictionary();
 
             string msg;
@@ -40,7 +43,7 @@ namespace Ovning_Garage10
             }
             catch (KeyNotFoundException)
             {
-                msg = String.Format($"Message for key {key} ({lang}) not found!");
+                msg = String.Format($"Message for key {key} not found!");
                 UI.WriteLine(msg);
             }
             return msg;
@@ -48,7 +51,6 @@ namespace Ovning_Garage10
 
         private static Dictionary<string, string> GetDictionary()
         {
-            //Console.WriteLine("GetDictionary...lang: " + lang);
             var msgDict = msgDictEN;
             switch (lang)
             {
@@ -68,21 +70,20 @@ namespace Ovning_Garage10
 
         internal static void InitMessages()
         {
-            //Console.WriteLine("InitMessages, lang: " + lang);
             try
             {
                 switch (lang)
                 {
                     case "LANG":
-                        Console.WriteLine("InitMessages - LANG");
+                        //Console.WriteLine("InitMessages - LANG");
                         InitMessagesLang();
                         break;
                     case "SE":
-                        Console.WriteLine("InitMessages - SE");
+                        //Console.WriteLine("InitMessages - SE");
                         InitMessagesSE();
                         break;
                     case "EN":
-                        Console.WriteLine("InitMessages - EN");
+                        //Console.WriteLine("InitMessages - EN");
                         InitMessagesEN();
                         break;
                 }
@@ -116,13 +117,16 @@ namespace Ovning_Garage10
             // Menu
             Add(dict, "menuSeparator", "============================================================================");
             Add(dict, "langMenuHeader", "Garage - Select language");
-			
+
             // Commands
             Add(dict, "S", "Svenska");
             Add(dict, "E", "Engelska");
 
+            // Error messages
             Add(dict, "notDefinedMessage", "<not defined>");
-            Add(dict, "nonExistingCommand", "Kommando '{0}' finns ej!");
+            Add(dict, "nonExistingCommand", "The command '{0}' does not exist!");
+            Add(dict, "readAndExecuteCommandFailure", "The command '{0}' caused a failure!\n'{1}'");
+
         }
 
         private static void InitMessagesSE()
@@ -136,17 +140,22 @@ namespace Ovning_Garage10
             // Menu
             Add(dict, "menuSeparator", "============================================================================");
             Add(dict, "mainMenuHeader", "*         Garage - Huvudmeny");
-			
+
             // Commands
-            Add(dict, "F", "Listar samtliga parkerade fordon");
-            Add(dict, "T", "Listar fordonstyper och hur många av varje som står i garaget");
-            Add(dict, "L", "Lägg till fordon");
+            Add(dict, "L", "Lista samtliga parkerade fordon");
+            Add(dict, "T", "Lista fordonstyper och hur många av varje som står i garaget");
+            Add(dict, "A", "Lägg till fordon");
             Add(dict, "R", "Ta bort fordon");
             Add(dict, "S", "Sök fordon via registreringsnumret");
             Add(dict, "C", "Skapa nytt garage");
-            Add(dict, "G", "Antal lediga parkeringsplatser");
+            Add(dict, "F", "Antal lediga parkeringsplatser");
             Add(dict, "M", "Huvudmeny");
-            Add(dict, "Q", "Du har valt att avsluta programmet");
+            Add(dict, "Q", "Avsluta programmet");
+
+            // Error messages
+            Add(dict, "notDefinedMessage", "<ej definierat>");
+            Add(dict, "nonExistingCommand", "Kommando '{0}' finns ej!");
+            Add(dict, "readAndExecuteCommandFailure", "Kommando '{0}' orsakade ett fel!\n'{1}'");
 
             // Vechicles
             Add(dict, "Airplane", "Flygplan");
@@ -159,15 +168,13 @@ namespace Ovning_Garage10
             Add(dict, "nbrParkingSpots", "Ange antal parkeringslatser för det nya garaget: ");
 
             // Messages
-            Add(dict, "noGarage", "Det finns inget garage - ett nytt garage behöver skapas.");
-            Add(dict, "nonExistingCommand", "Kommando '{0}' finns ej!");
+            Add(dict, "noGarageAddNew", "Det finns inget garage - ett nytt garage behöver skapas.");
             Add(dict, "newGarageCreated", "Nytt garage med {0} är skapat.");
             Add(dict, "nbrFreeSpots", "Antal lediga parkeringsplatser");
             Add(dict, "vehicleIsParked", "Fordonet är parkerat. Det finns {0} platser kvar.");
             Add(dict, "noFreeSpots", "Det går inte att parkera; det finns {0} platser kvar.");
             Add(dict, "onlyNumbersIsAllowed", "Du får bara använda siffror i svaret. Du skrev: \"{0}\".");
             Add(dict, "vehicleColon", "Fordon: ");
-            Add(dict, "notDefinedMessage", "<inte angivet>");
 
         }
 
@@ -184,15 +191,20 @@ namespace Ovning_Garage10
             Add(dict, "mainMenuHeader", "*         Garage - Main Menu");
 
             // Commands
-            Add(dict, "F", "Listing parked vehicles");
-            Add(dict, "T", "Listing types and quantity of vechicles in the garage");
-            Add(dict, "L", "Add vehicle");
+            Add(dict, "L", "List parked vehicles");
+            Add(dict, "T", "List types and quantity of vechicles in the garage");
+            Add(dict, "A", "Add vehicle");
             Add(dict, "R", "Remove vehicle");
             Add(dict, "S", "Search for vehicle on reg no");
             Add(dict, "C", "Create new garage");
-            Add(dict, "G", "Number of free parking spots");
+            Add(dict, "F", "Number of free parking spots");
             Add(dict, "M", "Main menu");
-            Add(dict, "Q", "You have chosen to exit from the program");
+            Add(dict, "Q", "Exit program");
+
+            // Error messages
+            Add(dict, "notDefinedMessage", "<not defined>");
+            Add(dict, "nonExistingCommand", "The command '{0}' does not exist!");
+            Add(dict, "readAndExecuteCommandFailure", "The command '{0}' caused a failure!\n'{1}'");
 
             // Vechicles
             Add(dict, "Airplane", "Airplane");
@@ -205,15 +217,13 @@ namespace Ovning_Garage10
             Add(dict, "nbrParkingSpots", "Enter number of parkings spots for the new garage: ");
 
             // Messages
-            Add(dict, "noGarage", "There's no garage - a new will be created.");
-            Add(dict, "nonExistingCommand", "Command '{0}' is not found!");
+            Add(dict, "noGarageAddNew", "There's no garage - a new will be created.");
             Add(dict, "newGarageCreated", "A new garage with {0} parking spots is created.");
             Add(dict, "nbrFreeSpots", "Number of free parking spots");
             Add(dict, "vehicleIsParked", "The vehicle is parked. There are {0} parking spots left.");
             Add(dict, "noFreeSpots", "It is not possible to park now; there are {0} parking spots left.");
             Add(dict, "onlyNumbersIsAllowed", "You may only use numbers in the answer. You wrote: \"{0}\".");
             Add(dict, "vehicleColon", "Vehicle: ");
-            Add(dict, "notDefinedMessage", "<not defined>");
 
         }
     }
