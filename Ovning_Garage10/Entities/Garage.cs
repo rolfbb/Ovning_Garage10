@@ -8,18 +8,18 @@ namespace Ovning_Garage10.Entities
     {
         private T[] vehicles;
 
-        private int NbrOfParkingLots { get; }
+        private int NbrOfParkingSpaces { get; }
 
-        public Garage(int nbrOfParkingLots)
+        public Garage(int nbrOfParkingSpaces)
         {
-            NbrOfParkingLots = nbrOfParkingLots;
-            vehicles = new T[nbrOfParkingLots];
+            NbrOfParkingSpaces = nbrOfParkingSpaces;
+            vehicles = new T[nbrOfParkingSpaces];
         }
 
         internal bool AddVehicle(T vehicle)
         {
             if (GetIsFull()) return false;
-            vehicles.SetValue(vehicle, GetFreeParkingSpotPosition());
+			vehicles.SetValue(vehicle, GetFreeParkingSpacePosition());
             return true;
         }
 
@@ -32,11 +32,11 @@ namespace Ovning_Garage10.Entities
             return true;
         }
 
-        private int GetFreeParkingSpotPosition()
+        private int GetFreeParkingSpacePosition()
         {
             //NOTE: GetIsFull must be called first!
             int position = 0;
-            for (int i = 0; i < NbrOfParkingLots; i++)
+            for (int i = 0; i < NbrOfParkingSpaces; i++)
             {
                 if (vehicles[i] == null)
                 {
@@ -47,7 +47,7 @@ namespace Ovning_Garage10.Entities
             return position;
         }
 
-        internal int GetNbrOfFreeSpots()
+        internal int GetNbrOfFreeSpaces()
         {
             int count = 0;
             foreach (var item in this)
@@ -56,15 +56,6 @@ namespace Ovning_Garage10.Entities
                     count++;
             }
             return count;
-        }
-
-        internal void ListAllVehicles()
-        {
-            foreach (var item in this)
-            {
-                if (item != null)
-                    Console.WriteLine(MessageHandler.message("vehicleColon") + item.ToString());
-            }
         }
 
         public IEnumerator<T> GetEnumerator()

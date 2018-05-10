@@ -44,33 +44,33 @@ namespace Ovning_Garage10
             MenuHandler.Add(cmdDict, "T", new MenuCommand { Description = "T", Method = () => ListVehicleTypes() });
             MenuHandler.Add(cmdDict, "A", new MenuCommand { Description = "A", Method = () => AddVehicle() });
             MenuHandler.Add(cmdDict, "R", new MenuCommand { Description = "R", Method = () => RemoveVehicle() });
-            MenuHandler.Add(cmdDict, "S", new MenuCommand { Description = "S", Method = () => SearchVehicleByRegNo() });
+			MenuHandler.Add(cmdDict, "S", new MenuCommand { Description = "S", Method = () => SearchVehicleByRegNbr() });
             MenuHandler.Add(cmdDict, "C", new MenuCommand { Description = "C", Method = () => CreateNewGarage() });
-            MenuHandler.Add(cmdDict, "F", new MenuCommand { Description = "F", Method = () => PrintNbrOfFreeSpots() });
+			MenuHandler.Add(cmdDict, "F", new MenuCommand { Description = "F", Method = () => PrintNbrOfFreeSpaces() });
             MenuHandler.Add(cmdDict, "M", new MenuCommand { Description = "M", Method = () => MenuHandler.PrintMainMenu() });
             MenuHandler.Add(cmdDict, "Q", new MenuCommand { Description = "Q", Method = () => run = false });
         }
 
-        private int GetNbrOfFreeSpots()
+        private int GetNbrOfFreeSpaces()
         {
-            return garage.GetNbrOfFreeSpots();
+            return garage.GetNbrOfFreeSpaces();
         }
 
-        private void PrintNbrOfFreeSpots()
+        private void PrintNbrOfFreeSpaces()
         {
-            UI.WriteLine("nbrFreeSpots: " + GetNbrOfFreeSpots());
+			UI.WriteLine("nbrFreeSpaces: " + GetNbrOfFreeSpaces());
         }
 
         private void CreateNewGarage()
         {
-            int nbrOfParkingLots = UI.AskForInt(MessageHandler.message("nbrParkingSpots"));
-            garage = new Garage<Vehicle>(nbrOfParkingLots);
-            UI.WriteLine(MessageHandler.message("newGarageCreated"), nbrOfParkingLots);
+			int nbrOfParkingSpaces = UI.AskForInt(MessageHandler.message("nbrParkingSpaces"));
+            garage = new Garage<Vehicle>(nbrOfParkingSpaces);
+            UI.WriteLine(MessageHandler.message("newGarageCreated"), nbrOfParkingSpaces);
         }
 
-        private void SearchVehicleByRegNo()
+        private void SearchVehicleByRegNbr()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("TODO: SearchVehicleByRegNo");
         }
 
         private void RemoveVehicle()
@@ -84,23 +84,28 @@ namespace Ovning_Garage10
         {
 
             Vehicle vehicle = new Car();
-            Console.WriteLine("Nytt fordon: " + vehicle.GetType().Name + " " + MessageHandler.message(vehicle.GetType().Name));
+            Console.WriteLine("RB New vehicle: " + vehicle.GetType().Name + " " + MessageHandler.message(vehicle.GetType().Name));
             bool retval = garage.AddVehicle(vehicle);
             if (retval)
-                Console.WriteLine(MessageHandler.message("vehicleIsParked"), GetNbrOfFreeSpots());
+                Console.WriteLine(MessageHandler.message("vehicleIsParked"), GetNbrOfFreeSpaces());
             else
-                Console.WriteLine(MessageHandler.message("noFreeSpots"), GetNbrOfFreeSpots());
+                Console.WriteLine(MessageHandler.message("noFreeSpaces"), GetNbrOfFreeSpaces());
             return retval;
         }
 
         private void ListVehicleTypes()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("TODO: ListVehicleTypes");
         }
 
         private void ListAllVehicles()
         {
-            garage.ListAllVehicles();
+			foreach (var item in garage)
+            {
+                if (item != null)
+                    Console.WriteLine(MessageHandler.message("vehicleColonLabel") + item.ToString());
+            }
+
         }
     }
 }

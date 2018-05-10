@@ -165,16 +165,16 @@ namespace Ovning_Garage10
             Add(dict, "Boat", "Båt");
 
             // Questions
-            Add(dict, "nbrParkingSpots", "Ange antal parkeringslatser för det nya garaget: ");
+            Add(dict, "nbrParkingSpaces", "Ange antal parkeringslatser för det nya garaget: ");
 
             // Messages
             Add(dict, "noGarageAddNew", "Det finns inget garage - ett nytt garage behöver skapas.");
             Add(dict, "newGarageCreated", "Nytt garage med {0} är skapat.");
-            Add(dict, "nbrFreeSpots", "Antal lediga parkeringsplatser");
+            Add(dict, "nbrFreeSpaces", "Antal lediga parkeringsplatser");
             Add(dict, "vehicleIsParked", "Fordonet är parkerat. Det finns {0} platser kvar.");
-            Add(dict, "noFreeSpots", "Det går inte att parkera; det finns {0} platser kvar.");
+            Add(dict, "noFreeSpaces", "Det går inte att parkera; det finns {0} platser kvar.");
             Add(dict, "onlyNumbersIsAllowed", "Du får bara använda siffror i svaret. Du skrev: \"{0}\".");
-            Add(dict, "vehicleColon", "Fordon: ");
+            Add(dict, "vehicleColonLabel", "Fordon: ");
 
         }
 
@@ -197,7 +197,7 @@ namespace Ovning_Garage10
             Add(dict, "R", "Remove vehicle");
             Add(dict, "S", "Search for vehicle on reg no");
             Add(dict, "C", "Create new garage");
-            Add(dict, "F", "Number of free parking spots");
+            Add(dict, "F", "Number of free parking spaces");
             Add(dict, "M", "Main menu");
             Add(dict, "Q", "Exit program");
 
@@ -214,16 +214,16 @@ namespace Ovning_Garage10
             Add(dict, "Boat", "Boat");
 
             // Questions
-            Add(dict, "nbrParkingSpots", "Enter number of parkings spots for the new garage: ");
+            Add(dict, "nbrParkingSpaces", "Enter number of parkings spaces for the new garage: ");
 
             // Messages
             Add(dict, "noGarageAddNew", "There's no garage - a new will be created.");
-            Add(dict, "newGarageCreated", "A new garage with {0} parking spots is created.");
-            Add(dict, "nbrFreeSpots", "Number of free parking spots");
-            Add(dict, "vehicleIsParked", "The vehicle is parked. There are {0} parking spots left.");
-            Add(dict, "noFreeSpots", "It is not possible to park now; there are {0} parking spots left.");
+            Add(dict, "newGarageCreated", "A new garage with {0} parking spaces is created.");
+            Add(dict, "nbrFreeSpaces", "Number of free parking spaces");
+            Add(dict, "vehicleIsParked", "The vehicle is parked. There are {0} parking spaces left.");
+            Add(dict, "noFreeSpaces", "It is not possible to park now; there are {0} parking spaces left.");
             Add(dict, "onlyNumbersIsAllowed", "You may only use numbers in the answer. You wrote: \"{0}\".");
-            Add(dict, "vehicleColon", "Vehicle: ");
+            Add(dict, "vehicleColonLabel", "Vehicle: ");
 
         }
     }
