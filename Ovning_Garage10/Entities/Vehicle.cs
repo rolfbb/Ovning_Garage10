@@ -2,24 +2,24 @@
 
 namespace Ovning_Garage10.Entities
 {
-    internal class Vehicle
+	internal partial class Vehicle
     {
-        public Vehicle()
+		internal string Color { get; set; }
+		internal float Length { get; set; }
+		internal int NbrOfWheels { get; set; }
+		internal int NbrOfSeats { get; set; }
+  
+		public Vehicle()
         {
         }
 
-        public Vehicle(string color, float length, int noOfWheels, int noOfSeats)
+		public Vehicle(string color, float length, int nbrOfWheels, int nbrOfSeats)
         {
             Color = color;
             Length = length;
-            NoOfWheels = noOfWheels;
-            NoOfSeats = noOfSeats;
+            NbrOfWheels = nbrOfWheels;
+            NbrOfSeats = nbrOfSeats;
         }
-
-        internal string Color { get; set; }
-        internal float Length { get; set; }
-        internal int NoOfWheels { get; set; }
-        internal int NoOfSeats { get; set; }
     }
 
     internal partial class MotorVehicle : Vehicle
@@ -48,15 +48,29 @@ namespace Ovning_Garage10.Entities
         internal int NoOfEngines { get; set; }
     }
 
-    internal class Car : MotorVehicle
-    {
-    }
+	internal class Car : MotorVehicle
+	{
+		public Car()
+		{
+		}
 
-    internal class Bus : MotorVehicle
-    {
-    }
+		public Car(string fuel, string regNo, int cylinderVolume, int noOfEngines) : base(fuel, regNo, cylinderVolume, noOfEngines)
+		{
+		}
+	}
 
-    internal class Motorcycle : MotorVehicle
+	internal class Bus : MotorVehicle
+	{
+		public Bus()
+		{
+		}
+
+		public Bus(string fuel, string regNo, int cylinderVolume, int noOfEngines) : base(fuel, regNo, cylinderVolume, noOfEngines)
+		{
+		}
+	}
+
+	internal class Motorcycle : MotorVehicle
     {
     }
 

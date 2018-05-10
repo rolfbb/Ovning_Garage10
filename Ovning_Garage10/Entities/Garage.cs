@@ -8,41 +8,38 @@ namespace Ovning_Garage10.Entities
     {
         private T[] vehicles;
 
-        private int NbrOfParkingSpaces { get; }
+		private int NbrOfSpaces { get; }
 
-        public Garage(int nbrOfParkingSpaces)
+        public Garage(int nbrOfSpaces)
         {
-            NbrOfParkingSpaces = nbrOfParkingSpaces;
-            vehicles = new T[nbrOfParkingSpaces];
+            NbrOfSpaces = nbrOfSpaces;
+            vehicles = new T[nbrOfSpaces];
         }
 
-        internal bool AddVehicle(T vehicle)
+		internal bool ParkVehicle(T vehicle)
         {
             if (GetIsFull()) return false;
-			vehicles.SetValue(vehicle, GetFreeParkingSpacePosition());
+			vehicles.SetValue(vehicle, GetFreeSpacePosition());
             return true;
         }
 
         public bool GetIsFull()
         {
             foreach (var item in vehicles)
-            {
-                if (item == null) return false;
-            }
-            return true;
+				if (item == null) return false;
+			return true;
         }
 
-        private int GetFreeParkingSpacePosition()
+		private int GetFreeSpacePosition()
         {
             //NOTE: GetIsFull must be called first!
             int position = 0;
-            for (int i = 0; i < NbrOfParkingSpaces; i++)
+            for (int i = 0; i < NbrOfSpaces; i++)
             {
-                if (vehicles[i] == null)
-                {
-                    position = i;
-                    break;
-                }
+                if (vehicles[i] != null)
+					continue;
+				position = i;
+				break;
             }
             return position;
         }

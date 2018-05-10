@@ -54,10 +54,11 @@
     <Compile Include="Utilities\LimitedList.cs" />
     <Compile Include="Utilities\UI.cs" />
     <Compile Include="Examples\AdrianExampleVehicleFactory.cs" />
-    <Compile Include="Entities\VehicleFactory.cs" />
+    <Compile Include="Entities\VehicleFactory2.cs" />
     <Compile Include="Entities\VehicleEnum.cs" />
     <Compile Include="Entities\FuelType.cs" />
     <Compile Include="Entities\BoatType.cs" />
+    <Compile Include="Entities\VehiclePropertiesEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

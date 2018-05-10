@@ -165,7 +165,7 @@ namespace Ovning_Garage10
             Add(dict, "Boat", "Båt");
 
             // Questions
-            Add(dict, "nbrParkingSpaces", "Ange antal parkeringslatser för det nya garaget: ");
+            Add(dict, "nbrSpaces", "Ange antal parkeringslatser för det nya garaget: ");
 
             // Messages
             Add(dict, "noGarageAddNew", "Det finns inget garage - ett nytt garage behöver skapas.");
@@ -214,7 +214,7 @@ namespace Ovning_Garage10
             Add(dict, "Boat", "Boat");
 
             // Questions
-            Add(dict, "nbrParkingSpaces", "Enter number of parkings spaces for the new garage: ");
+            Add(dict, "nbrSpaces", "Enter number of parkings spaces for the new garage: ");
 
             // Messages
             Add(dict, "noGarageAddNew", "There's no garage - a new will be created.");

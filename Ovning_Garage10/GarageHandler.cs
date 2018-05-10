@@ -63,9 +63,9 @@ namespace Ovning_Garage10
 
         private void CreateNewGarage()
         {
-			int nbrOfParkingSpaces = UI.AskForInt(MessageHandler.message("nbrParkingSpaces"));
-            garage = new Garage<Vehicle>(nbrOfParkingSpaces);
-            UI.WriteLine(MessageHandler.message("newGarageCreated"), nbrOfParkingSpaces);
+			int nbrOfSpaces = UI.AskForInt(MessageHandler.message("nbrSpaces"));
+            garage = new Garage<Vehicle>(nbrOfSpaces);
+            UI.WriteLine(MessageHandler.message("newGarageCreated"), nbrOfSpaces);
         }
 
         private void SearchVehicleByRegNbr()
@@ -82,10 +82,9 @@ namespace Ovning_Garage10
 
         private bool AddVehicle()
         {
-
-            Vehicle vehicle = new Car();
-            Console.WriteLine("RB New vehicle: " + vehicle.GetType().Name + " " + MessageHandler.message(vehicle.GetType().Name));
-            bool retval = garage.AddVehicle(vehicle);
+			//VehicleFactory vehicleFactory = new VehicleFactory();
+			//VehicleFactory vehicleFactory = new VehicleFactory();
+            bool retval = garage.ParkVehicle(vehicle);
             if (retval)
                 Console.WriteLine(MessageHandler.message("vehicleIsParked"), GetNbrOfFreeSpaces());
             else
