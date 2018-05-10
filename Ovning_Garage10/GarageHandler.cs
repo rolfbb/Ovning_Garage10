@@ -82,8 +82,9 @@ namespace Ovning_Garage10
 
         private bool AddVehicle()
         {
-			//VehicleFactory vehicleFactory = new VehicleFactory();
-			//VehicleFactory vehicleFactory = new VehicleFactory();
+			VehicleFactory vehicleFactory = new VehicleFactory();
+			Vehicle vehicle = vehicleFactory.CreateVehicle();
+
             bool retval = garage.ParkVehicle(vehicle);
             if (retval)
                 Console.WriteLine(MessageHandler.message("vehicleIsParked"), GetNbrOfFreeSpaces());

@@ -1,26 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Ovning_Garage10.Entities
 {
 	internal partial class Vehicle
     {
-		internal string Color { get; set; }
-		internal float Length { get; set; }
-		internal int NbrOfWheels { get; set; }
-		internal int NbrOfSeats { get; set; }
-  
+		private static Dictionary<string, string> propDict = new Dictionary<string, string>();
+		internal static Dictionary<string, string> PropDict { get => propDict; }
+
+        internal string Color { get; set; }
+        internal float Length { get; set; }
+        internal int NbrOfWheels { get; set; }
+        internal int NbrOfSeats { get; set; }
+
 		public Vehicle()
         {
+			Init();
         }
 
 		public Vehicle(string color, float length, int nbrOfWheels, int nbrOfSeats)
+
         {
+			Init();
             Color = color;
             Length = length;
             NbrOfWheels = nbrOfWheels;
             NbrOfSeats = nbrOfSeats;
         }
-    }
+
+		private void Init()
+        {
+			PropDict.Add("Color", "string");
+			PropDict.Add("Lenght", "int");
+			PropDict.Add("NbrOfWheels", "int");
+			PropDict.Add("NbrOfSeats", "int");
+        }
+}
 
     internal partial class MotorVehicle : Vehicle
     {

@@ -167,6 +167,17 @@ namespace Ovning_Garage10
             // Questions
             Add(dict, "nbrSpaces", "Ange antal parkeringslatser för det nya garaget: ");
 
+            // Entity properties
+			Add(dict, "Color", "Color");
+			Add(dict, "Lenght", "Lenght");
+			Add(dict, "NbrOfWheels", "Number Of Wheels");
+			Add(dict, "NbrOfSeats", "Number of seats: ");
+
+            Add(dict, "ColorMsg", "Color of vehicle: ");
+            Add(dict, "LenghtMsg", "Lenght of vehicle: ");
+            Add(dict, "NbrOfWheelsMsg", "Number of wheels: ");
+			Add(dict, "NbrOfSeatsMsg", "Number of seats: ");
+            
             // Messages
             Add(dict, "noGarageAddNew", "Det finns inget garage - ett nytt garage behöver skapas.");
             Add(dict, "newGarageCreated", "Nytt garage med {0} är skapat.");
