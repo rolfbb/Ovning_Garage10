@@ -5,8 +5,8 @@ namespace Ovning_Garage10.Entities
 {
 	internal partial class Vehicle
     {
-		private static Dictionary<string, string> propDict = new Dictionary<string, string>();
-		internal static Dictionary<string, string> PropDict { get => propDict; }
+		private static Dictionary<string, string> propertyTypeDict = new Dictionary<string, string>();
+		internal static Dictionary<string, string> PropertyTypeDict { get => propertyTypeDict; }
 
         internal string Color { get; set; }
         internal float Length { get; set; }
@@ -15,25 +15,25 @@ namespace Ovning_Garage10.Entities
 
 		public Vehicle()
         {
-			Init();
+			InitPropertyTypeDict();
         }
 
 		public Vehicle(string color, float length, int nbrOfWheels, int nbrOfSeats)
 
         {
-			Init();
+			InitPropertyTypeDict();
             Color = color;
             Length = length;
             NbrOfWheels = nbrOfWheels;
             NbrOfSeats = nbrOfSeats;
         }
 
-		private void Init()
+		private void InitPropertyTypeDict()
         {
-			PropDict.Add("Color", "string");
-			PropDict.Add("Lenght", "int");
-			PropDict.Add("NbrOfWheels", "int");
-			PropDict.Add("NbrOfSeats", "int");
+			PropertyTypeDict.Add("Color", "string");
+			PropertyTypeDict.Add("Lenght", "int");
+			PropertyTypeDict.Add("NbrOfWheels", "int");
+			PropertyTypeDict.Add("NbrOfSeats", "int");
         }
 }
 

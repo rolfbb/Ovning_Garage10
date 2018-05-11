@@ -6,7 +6,7 @@ namespace Ovning_Garage10.Entities
 {
 	public class VehicleFactory
 	{
-		KeyValuePair<string, string>[] createVehicleArr = new KeyValuePair<string, string>[4];
+		private static KeyValuePair<string, string>[] propQArr = new KeyValuePair<string, string>[4];
 
 		public VehicleFactory()
 		{
@@ -19,11 +19,11 @@ namespace Ovning_Garage10.Entities
 		internal Vehicle CreateVehicle()
 		{
 			Vehicle vehicle = new Vehicle();
-			GetCreateVehicleInputList(createVehicleArr); //TODO: Should it return the array?
+			CreatePropertyQueryArr(propQArr); //TODO: Should it return the array?
 
 			Console.WriteLine("CreateVehicleArr: ");
 			string input;
-			foreach (var kvp in createVehicleArr)
+			foreach (var kvp in propQArr)
 			{
 				input = UI.Ask(kvp.Value);
 				string property = kvp.Value;
@@ -41,7 +41,7 @@ namespace Ovning_Garage10.Entities
 					vehicle.Color = pValue; 
 					break;
 				case "Length": 
-					vehicle.Length = pValue; 
+					vehicle.Length = pValue; //int 
 					break;
 				case "NbrOfWheels": 
 					vehicle.NbrOfWheels = pValue; 
@@ -54,30 +54,54 @@ namespace Ovning_Garage10.Entities
 			}
 		}
 
-		private static KeyValuePair<string, string>[] GetCreateVehicleInputList(KeyValuePair<string, string>[] qArr)
-		{
-			string pName;
-			string pMessage;
-			var vehicleProperties = Enum.GetValues(typeof(Vehicle.VehiclePropertiesEnum));
+		private static KeyValuePair<string, string>[] CreatePropertyQueryArr(KeyValuePair<string, string>[] propQArr)
+        {
+            string pName;
+            string pMessage;
 
-			for (int i = 0; i < vehicleProperties.Length; i++)
-			{
-				pName = vehicleProperties.GetValue(i).ToString();
-				try
-				{
-					pMessage = MessageHandler.message(pName + "Msg");
-					KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(pName, pMessage);
-					qArr[i] = propertyMessageKvp;
-				}
-				catch (Exception ex)
-				{
-					UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", pNameß);
-					UI.ErrorLine(ex.Message);
-				}
-			}
+			for (int i = 0; i < propQArr.Length; i++)
+            {
+                pName = propQArr.GetValue(i).ToString();
+                try
+                {
+                    pMessage = MessageHandler.message(pName + "Msg");
+                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(pName, pMessage);
+                    propQArr[i] = propertyMessageKvp;
+                }
+                catch (Exception ex)
+                {
+                    UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", pNameß);
+                    UI.ErrorLine(ex.Message);
+                }
+            }
 
-			return (KeyValuePair<string, string>[])qArr.Clone();
-		}
+            return (KeyValuePair<string, string>[])propQArr.Clone();
+        }
+
+		private static KeyValuePair<string, string>[] GetCreateVehicleInputListByENUM(KeyValuePair<string, string>[] propQArr)
+        {
+            string pName;
+            string pMessage;
+            var vehicleProperties = Enum.GetValues(typeof(Vehicle.VehiclePropertiesEnum));
+
+            for (int i = 0; i < vehicleProperties.Length; i++)
+            {
+                pName = vehicleProperties.GetValue(i).ToString();
+                try
+                {
+                    pMessage = MessageHandler.message(pName + "Msg");
+                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(pName, pMessage);
+                    propQArr[i] = propertyMessageKvp;
+                }
+                catch (Exception ex)
+                {
+                    UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", pNameß);
+                    UI.ErrorLine(ex.Message);
+                }
+            }
+
+            return (KeyValuePair<string, string>[])propQArr.Clone();
+        }
 
 		internal Car CreateCar(string wheels)
 		{
