@@ -6,7 +6,11 @@ namespace Ovning_Garage10.Entities
 {
 	public class VehicleFactory
 	{
-		private static KeyValuePair<string, string>[] propQArr = new KeyValuePair<string, string>[4];
+        // Array used for asking property queries to the user
+        //private static KeyValuePair<string, string>[] propQArr = new KeyValuePair<string, string>[4]; //name/type
+
+        // Property query dictionary: dictKey=property, kvpKey=type, kvpValue=input query text
+        private static Dictionary<string, KeyValuePair<string, string>> propQueryDict = new Dictionary<string, KeyValuePair<string, string>>();
 
 		public VehicleFactory()
 		{
@@ -19,54 +23,67 @@ namespace Ovning_Garage10.Entities
 		internal Vehicle CreateVehicle()
 		{
 			Vehicle vehicle = new Vehicle();
-			CreatePropertyQueryArr(propQArr); //TODO: Should it return the array?
+            CreatePropertyQueryDict(Vehicle.PropertyTypeDict); //TODO: Should it return the array?
 
 			Console.WriteLine("CreateVehicleArr: ");
 			string input;
-			foreach (var kvp in propQArr)
+			foreach (var kvp in propQDict)
 			{
 				input = UI.Ask(kvp.Value);
 				string property = kvp.Value;
-				vehicle.(kvp.Value) = input;
+				//vehicle.(kvp.Value) = input;
 			}
 
 			return vehicle;
 		}
 
-		private static void SetProperty(Vehicle vehicle, string pName, string pValue)
-		{
-			switch (pName)
-			{
-				case "Color": 
-					vehicle.Color = pValue; 
-					break;
-				case "Length": 
-					vehicle.Length = pValue; //int 
-					break;
-				case "NbrOfWheels": 
-					vehicle.NbrOfWheels = pValue; 
-					break;
-				case "NbrOfSeats": 
-					vehicle.NbrOfSeats = pValue; 
-					break;
-				default:
-					break;
-			}
-		}
-
-		private static KeyValuePair<string, string>[] CreatePropertyQueryArr(KeyValuePair<string, string>[] propQArr)
+        private static void SetProperty(Vehicle vehicle, string pName, string pValue)
         {
-            string pName;
-            string pMessage;
-
-			for (int i = 0; i < propQArr.Length; i++)
+            switch (pName)
             {
-                pName = propQArr.GetValue(i).ToString();
+                case "Color":
+                    vehicle.Color = pValue;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void SetProperty(Vehicle vehicle, string pName, int pValue)
+        {
+            switch (pName)
+            {
+                case "Length":
+                    vehicle.Length = pValue; //int 
+                    break;
+                case "NbrOfWheels":
+                    vehicle.NbrOfWheels = pValue;
+                    break;
+                case "NbrOfSeats":
+                    vehicle.NbrOfSeats = pValue;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static KeyValuePair<string, string>[] CreatePropertyQueryDict(Dictionary<string, string> propTypeDict)
+        {
+            
+            string pType;
+            string pMessage;
+            var propKeys = propTypeDict.Keys;
+            int i = 0;
+
+            foreach (string property in propKeys)
+            {
                 try
                 {
-                    pMessage = MessageHandler.message(pName + "Msg");
-                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(pName, pMessage);
+					pType = propTypeDict[property];
+                    pMessage = MessageHandler.message(property + "Msg");
+                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(property, pType);
                     propQArr[i] = propertyMessageKvp;
+                    i++;
                 }
                 catch (Exception ex)
                 {
@@ -75,7 +92,7 @@ namespace Ovning_Garage10.Entities
                 }
             }
 
-            return (KeyValuePair<string, string>[])propQArr.Clone();
+            return propQArr; // TODO: Clone?
         }
 
 		private static KeyValuePair<string, string>[] GetCreateVehicleInputListByENUM(KeyValuePair<string, string>[] propQArr)
