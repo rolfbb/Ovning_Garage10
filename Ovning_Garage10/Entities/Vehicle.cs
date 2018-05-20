@@ -6,6 +6,7 @@ namespace Ovning_Garage10.Entities
 	internal partial class Vehicle
     {
 		private static Dictionary<string, string> propertyTypeDict = new Dictionary<string, string>();
+
 		internal static Dictionary<string, string> PropertyTypeDict { get => propertyTypeDict; }
 
         internal string Color { get; set; }
@@ -31,7 +32,7 @@ namespace Ovning_Garage10.Entities
 		private void InitPropertyTypeDict()
         {
 			PropertyTypeDict.Add("Color", "string");
-			PropertyTypeDict.Add("Lenght", "int");
+			PropertyTypeDict.Add("Length", "int");
 			PropertyTypeDict.Add("NbrOfWheels", "int");
 			PropertyTypeDict.Add("NbrOfSeats", "int");
         }

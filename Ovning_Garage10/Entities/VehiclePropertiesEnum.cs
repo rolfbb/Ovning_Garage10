@@ -6,13 +6,9 @@ namespace Ovning_Garage10.Entities
     {
         public enum VehiclePropertiesEnum 
 		{ 
-			[Description("string")]
 			Color, 
-			[Description("int")]
-			Lenght, 
-			[Description("int")]
+			Length, 
 			NbrOfWheels, 
-			[Description("int")]
 			NbrOfSeats 
 		}
     }

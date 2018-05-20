@@ -59,6 +59,7 @@
     <Compile Include="Entities\FuelType.cs" />
     <Compile Include="Entities\BoatType.cs" />
     <Compile Include="Entities\VehiclePropertiesEnum.cs" />
+    <Compile Include="Entities\VehiclePropertyStruct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

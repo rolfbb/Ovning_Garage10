@@ -4,38 +4,42 @@ using Ovning_Garage10.Utilities;
 
 namespace Ovning_Garage10.Entities
 {
-	public class VehicleFactory
-	{
-        // Array used for asking property queries to the user
-        //private static KeyValuePair<string, string>[] propQArr = new KeyValuePair<string, string>[4]; //name/type
+    public partial class VehicleFactory
+    {
+        private static Dictionary<string, VehiclePropertyStruct> propStructDict = new Dictionary<string, VehiclePropertyStruct>();
 
-        // Property query dictionary: dictKey=property, kvpKey=type, kvpValue=input query text
-        private static Dictionary<string, KeyValuePair<string, string>> propQueryDict = new Dictionary<string, KeyValuePair<string, string>>();
+        public VehicleFactory()
+        {
+        }
 
-		public VehicleFactory()
-		{
-		}
+        public VehicleFactory(string type, string color)
+        {
+        }
 
-		public VehicleFactory(string type, string color)
-		{
-		}
+        internal Vehicle CreateVehicle()
+        {
+            Vehicle vehicle = new Vehicle();
+            propStructDict = CreatePropertyStructDict(Vehicle.PropertyTypeDict); //TODO: Should it return the array?
 
-		internal Vehicle CreateVehicle()
-		{
-			Vehicle vehicle = new Vehicle();
-            CreatePropertyQueryDict(Vehicle.PropertyTypeDict); //TODO: Should it return the array?
+            string inputStr;
+            int inputInt;
+            foreach (var propStructKvp in propStructDict)
+            {
+                var propStruct = propStructKvp.Value;
+                if (propStruct.PropertyType == "string")
+                {
+                    inputStr = UI.Ask(propStruct.PropertyQuery);
+                    SetProperty(vehicle, propStruct.PropertyName, inputStr);
+                }
+                else if (propStruct.PropertyType == "int")
+                {
+                    inputInt = UI.AskForInt(propStruct.PropertyQuery);
+                    SetProperty(vehicle, propStruct.PropertyName, inputInt);
+                }
+            }
 
-			Console.WriteLine("CreateVehicleArr: ");
-			string input;
-			foreach (var kvp in propQDict)
-			{
-				input = UI.Ask(kvp.Value);
-				string property = kvp.Value;
-				//vehicle.(kvp.Value) = input;
-			}
-
-			return vehicle;
-		}
+            return vehicle;
+        }
 
         private static void SetProperty(Vehicle vehicle, string pName, string pValue)
         {
@@ -54,7 +58,7 @@ namespace Ovning_Garage10.Entities
             switch (pName)
             {
                 case "Length":
-                    vehicle.Length = pValue; //int 
+                    vehicle.Length = pValue;
                     break;
                 case "NbrOfWheels":
                     vehicle.NbrOfWheels = pValue;
@@ -67,9 +71,9 @@ namespace Ovning_Garage10.Entities
             }
         }
 
-        private static KeyValuePair<string, string>[] CreatePropertyQueryDict(Dictionary<string, string> propTypeDict)
+        private static Dictionary<string, VehiclePropertyStruct> CreatePropertyStructDict(Dictionary<string, string> propTypeDict)
         {
-            
+
             string pType;
             string pMessage;
             var propKeys = propTypeDict.Keys;
@@ -79,107 +83,81 @@ namespace Ovning_Garage10.Entities
             {
                 try
                 {
-					pType = propTypeDict[property];
+                    pType = propTypeDict[property];
                     pMessage = MessageHandler.message(property + "Msg");
-                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(property, pType);
-                    propQArr[i] = propertyMessageKvp;
+                    propStructDict[property] = new VehiclePropertyStruct(property, pType, pMessage);
                     i++;
                 }
                 catch (Exception ex)
                 {
-                    UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", pNameß);
+                    UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", property);
                     UI.ErrorLine(ex.Message);
                 }
             }
 
-            return propQArr; // TODO: Clone?
+            return propStructDict; // TODO: Clone?
         }
 
-		private static KeyValuePair<string, string>[] GetCreateVehicleInputListByENUM(KeyValuePair<string, string>[] propQArr)
+        internal Car CreateCar(string wheels)
         {
-            string pName;
-            string pMessage;
-            var vehicleProperties = Enum.GetValues(typeof(Vehicle.VehiclePropertiesEnum));
-
-            for (int i = 0; i < vehicleProperties.Length; i++)
-            {
-                pName = vehicleProperties.GetValue(i).ToString();
-                try
-                {
-                    pMessage = MessageHandler.message(pName + "Msg");
-                    KeyValuePair<string, string> propertyMessageKvp = new KeyValuePair<string, string>(pName, pMessage);
-                    propQArr[i] = propertyMessageKvp;
-                }
-                catch (Exception ex)
-                {
-                    UI.ErrorLine("Warning, an error occured when setting descriptive message for property {0}", pNameß);
-                    UI.ErrorLine(ex.Message);
-                }
-            }
-
-            return (KeyValuePair<string, string>[])propQArr.Clone();
+            return new Car();
         }
 
-		internal Car CreateCar(string wheels)
-		{
-			return new Car();
-		}
+        internal Bus CreateBus(string passengers)
+        {
+            return new Bus();
+        }
 
-		internal Bus CreateBus(string passengers)
-		{
-			return new Bus();
-		}
+        private void Testing()
+        {
+            string type = "CAR";
+            string color = "green";
+            var vf = new VehicleFactory(type, color);
 
-		private void Testing()
-		{
-			string type = "CAR";
-			string color = "green";
-			var vf = new VehicleFactory(type, color);
+            string wheels = "round";
+            Vehicle vehicle = vf.CreateCar(wheels);
 
-			string wheels = "round";
-			Vehicle vehicle = vf.CreateCar(wheels);
+            //alternativt, :
+            //vf.GetCar();
+            //fråga vf: vad behöver du för data vf.GetCarProperties() (dictionary, cyl/int, 
+            //color/string, etc ENUM?); vf.AddProperty... vf.GetVehicle()
+        }
+    }
 
-			//alternativt, :
-			//vf.GetCar();
-			//fråga vf: vad behöver du för data vf.GetCarProperties() (dictionary, cyl/int, 
-			//color/string, etc ENUM?); vf.AddProperty... vf.GetVehicle()
-		}
-	}
+    class VehicleFactoryAdrian
+    {
+        private readonly string type;
+        private readonly string color;
 
-	class VehicleFactoryAdrian
-	{
-		private readonly string type;
-		private readonly string color;
+        public VehicleFactoryAdrian(string type, string color)
+        {
+            this.type = type;
+            this.color = color;
+        }
 
-		public VehicleFactoryAdrian(string type, string color)
-		{
-			this.type = type;
-			this.color = color;
-		}
+        public Car CreateCar(string wheels)
+        {
+            return new Car();
+        }
 
-		public Car CreateCar(string wheels)
-		{
-			return new Car();
-		}
+        public Bus CreateBus(string passengers)
+        {
+            return new Bus();
+        }
 
-		public Bus CreateBus(string passengers)
-		{
-			return new Bus();
-		}
+        private void Testing()
+        {
+            string type = "CAR";
+            string color = "green";
+            var vf = new VehicleFactoryAdrian(type, color);
 
-		private void Testing()
-		{
-			string type = "CAR";
-			string color = "green";
-			var vf = new VehicleFactoryAdrian(type, color);
+            string wheels = "round";
+            Vehicle vehicle = vf.CreateCar(wheels);
 
-			string wheels = "round";
-			Vehicle vehicle = vf.CreateCar(wheels);
-
-			//alternativt, :
-			//vf.GetCar();
-			//fråga vf: vad behöver du för data vf.GetCarProperties() (dictionary, cyl/int, 
-			//color/string, etc ENUM?); vf.AddProperty... vf.GetVehicle()
-		}
-	}
+            //alternativt, :
+            //vf.GetCar();
+            //fråga vf: vad behöver du för data vf.GetCarProperties() (dictionary, cyl/int, 
+            //color/string, etc ENUM?); vf.AddProperty... vf.GetVehicle()
+        }
+    }
 }
